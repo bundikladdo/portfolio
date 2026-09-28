@@ -1,0 +1,180 @@
+{
+  "brand_identity": {
+    "name": "Portfolio",
+    "tagline": "Beautiful · Minimal · Clean",
+    "core_archetype": "Soft editorial personal site — quiet confidence, generous whitespace, product-first work grid",
+    "target_audience": {
+      "primary": "Hiring managers, founders, and collaborators reviewing product / design / engineering work",
+      "device_profile": "Desktop-first sidebar layout; stacks to single column on mobile",
+      "emotional_tone": "Calm, approachable, precise — never loud or decorative"
+    },
+    "visual_symbols": [
+      "Circular profile avatar with soft drop shadow",
+      "Soft white project cards with subtle elevation",
+      "Muted gray tag pills on project cards",
+      "Minimal social icon row (X, LinkedIn, GitHub, Dribbble)"
+    ]
+  },
+  "color_system": {
+    "theme_mode": "Light only (no dark mode for v1)",
+    "hex_tokens": {
+      "background": "#F5F5F4",
+      "surface": "#FFFFFF",
+      "foreground": "#1C1917",
+      "muted_foreground": "#78716C",
+      "subtle_foreground": "#A8A29E",
+      "border": "#E7E5E4",
+      "border_soft": "#F5F5F4",
+      "tag_bg": "#F5F5F4",
+      "tag_text": "#57534E",
+      "accent": "#1C1917",
+      "accent_hover": "#44403C",
+      "focus_ring": "#A8A29E"
+    },
+    "hsl_tokens": {
+      "background": "hsl(60, 5%, 96%)",
+      "surface": "hsl(0, 0%, 100%)",
+      "foreground": "hsl(24, 10%, 10%)",
+      "muted_foreground": "hsl(25, 5%, 45%)",
+      "border": "hsl(24, 6%, 90%)",
+      "tag_bg": "hsl(60, 5%, 96%)"
+    },
+    "rules": [
+      "Never use pure black #000000 for text — use stone-900 (#1C1917).",
+      "Page background is warm stone-100 (#F5F5F4); cards and sidebar content sit on white.",
+      "No gradients, no neon accents, no colored brand CTAs in v1.",
+      "Shadows stay soft and diffuse — elevation via blur, not hard borders.",
+      "All text contrast must meet WCAG AA 4.5:1 on the stone background."
+    ]
+  },
+  "typography": {
+    "heading_font": "Inter, system-ui, sans-serif",
+    "body_font": "Inter, system-ui, sans-serif",
+    "font_pair_rationale": "Single sans family keeps the UI quiet and product-like; weight and size create hierarchy instead of mixed typefaces.",
+    "hierarchy_rules": {
+      "name": "text-2xl font-semibold tracking-tight text-stone-900",
+      "role": "text-sm font-medium text-stone-500",
+      "bio": "text-sm leading-relaxed text-stone-500",
+      "section_title": "text-2xl sm:text-3xl font-semibold tracking-tight text-stone-900",
+      "card_title": "text-lg font-semibold tracking-tight text-stone-900",
+      "card_description": "text-sm leading-relaxed text-stone-500",
+      "nav_link": "text-sm font-medium text-stone-500 hover:text-stone-900",
+      "nav_link_active": "text-sm font-medium text-stone-900",
+      "tag": "text-xs font-medium text-stone-600"
+    },
+    "forbidden": [
+      "Decorative serif display fonts",
+      "Monospace for body copy",
+      "Uppercase tracking-wide labels except optional section micro-labels",
+      "Font sizes larger than text-3xl on the homepage"
+    ]
+  },
+  "spacing_and_layout": {
+    "page_shell": "min-h-screen bg-stone-100",
+    "desktop_grid": "lg:grid lg:grid-cols-[minmax(260px,320px)_1fr] lg:gap-10 xl:gap-16",
+    "sidebar_width": "260px–320px sticky left column",
+    "sidebar_padding": "px-6 py-10 lg:px-8 lg:py-12",
+    "main_padding": "px-6 py-10 lg:px-8 lg:py-12 lg:pr-12",
+    "card_gap": "gap-6 sm:gap-8",
+    "card_radius": "rounded-2xl",
+    "avatar_size": "h-28 w-28 sm:h-32 sm:w-32",
+    "max_content_width": "max-w-5xl on the work grid column",
+    "rules": [
+      "Sidebar stays sticky on desktop; collapses above the work grid on mobile.",
+      "Project cards are 1 column on mobile, 2 columns from md up.",
+      "Internal card padding is p-5 sm:p-6 — never let text touch the card edge.",
+      "Leave generous vertical rhythm between avatar, bio, socials, and nav (space-y-6+)."
+    ]
+  },
+  "elevation_and_surfaces": {
+    "page_background": "bg-stone-100",
+    "card": "bg-white rounded-2xl shadow-[0_1px_2px_rgba(28,25,23,0.04),0_8px_24px_rgba(28,25,23,0.06)]",
+    "card_hover": "hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(28,25,23,0.05),0_16px_32px_rgba(28,25,23,0.08)] transition duration-200",
+    "avatar": "rounded-full shadow-[0_4px_16px_rgba(28,25,23,0.12)] ring-4 ring-white",
+    "tag_pill": "inline-flex rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-600",
+    "rules": [
+      "Prefer soft multi-layer shadows over 1px borders for cards.",
+      "Use ring-white on the avatar so it separates from the stone page bg.",
+      "Do not add colored hover fills on cards — only lift + shadow."
+    ]
+  },
+  "components": {
+    "sidebar": {
+      "order": ["avatar", "name", "role", "bio", "social_row", "nav"],
+      "social_icons": ["x", "linkedin", "github", "dribbble"],
+      "nav_items": ["Work", "Resume", "Info"],
+      "nav_style": "vertical list, calm text links, active = stone-900"
+    },
+    "project_card": {
+      "structure": ["thumbnail", "title", "description", "tags"],
+      "thumbnail": "aspect-[16/10] object-cover rounded-t-2xl bg-stone-100",
+      "tags": "wrap row of soft gray pills below description"
+    }
+  },
+  "homepage_blueprint": {
+    "layout": "Two-column desktop shell: sticky profile sidebar + Recent Work grid",
+    "section_sidebar": {
+      "avatar": "Circular portrait placeholder",
+      "name": "Your Name",
+      "role": "Product Designer",
+      "bio": "Short 2–3 sentence bio describing focus and craft.",
+      "socials": "Icon-only links opening in new tabs",
+      "nav": "Work (active) · Resume · Info"
+    },
+    "section_recent_work": {
+      "title": "Recent Work",
+      "grid": "grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8",
+      "cards": [
+        {
+          "title": "Project One",
+          "description": "One-line outcome-focused summary of the project.",
+          "tags": ["Product Design", "Mobile"]
+        },
+        {
+          "title": "Project Two",
+          "description": "One-line outcome-focused summary of the project.",
+          "tags": ["Web App", "Design System"]
+        },
+        {
+          "title": "Project Three",
+          "description": "One-line outcome-focused summary of the project.",
+          "tags": ["Branding", "Marketing"]
+        },
+        {
+          "title": "Project Four",
+          "description": "One-line outcome-focused summary of the project.",
+          "tags": ["Dashboard", "SaaS"]
+        }
+      ]
+    }
+  },
+  "motion": {
+    "card_hover": "200ms ease translate-y + shadow",
+    "link_hover": "color transition 150ms",
+    "rules": [
+      "No page-load animations in v1.",
+      "No parallax, no scroll-triggered reveals.",
+      "Respect prefers-reduced-motion: disable translate on cards."
+    ]
+  },
+  "content_placeholders": {
+    "name": "Your Name",
+    "role": "Product Designer",
+    "bio": "I design calm, useful digital products. Currently focused on systems, craft, and clarity.",
+    "email": "hello@example.com",
+    "social": {
+      "x": "https://x.com/",
+      "linkedin": "https://linkedin.com/in/",
+      "github": "https://github.com/",
+      "dribbble": "https://dribbble.com/"
+    }
+  },
+  "do_not": [
+    "Add a top marketing navbar or hero banner",
+    "Use colored primary buttons on the homepage",
+    "Dark mode toggle in v1",
+    "Emoji in UI chrome",
+    "Busy backgrounds, noise textures, or gradients",
+    "More than 2 columns in the work grid"
+  ]
+}
