@@ -26,30 +26,20 @@ function buttonClassName(variant: ButtonVariant, className?: string) {
 }
 
 export function Button(props: Props) {
-  const variant = props.variant ?? "secondary";
-  const className = buttonClassName(variant, props.className);
-
-  if ("href" in props && props.href) {
-    const { href, variant: _variant, className: _className, children, ...linkProps } = props;
+  if (props.href !== undefined) {
+    const { href, variant = "secondary", className, children, ...linkProps } = props;
+    const classes = buttonClassName(variant, className);
 
     if (linkProps.download) {
-      return (
-        <a href={href} className={className} {...linkProps}>
-          {children}
-        </a>
-      );
+      return <a href={href} className={classes} {...linkProps}>{children}</a>;
     }
 
-    return (
-      <Link href={href} className={className} {...linkProps}>
-        {children}
-      </Link>
-    );
+    return <Link href={href} className={classes} {...linkProps}>{children}</Link>;
   }
 
-  const { variant: _variant, className: _className, children, ...buttonProps } = props;
+  const { variant = "secondary", className, children, ...buttonProps } = props;
   return (
-    <button className={className} {...buttonProps}>
+    <button type="button" className={buttonClassName(variant, className)} {...buttonProps}>
       {children}
     </button>
   );

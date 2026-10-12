@@ -1,71 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AutodeusChip, BrandChip } from "@/components/Brand";
 import { HeroActions } from "@/components/HeroActions";
-// import { CheckpointNav } from "@/components/CheckpointNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WorkTile } from "@/components/WorkTile";
-import { brands, selectedWork, site } from "@/data/site";
-
-function Stripe() {
-  return <div className="stripe" aria-hidden="true" />;
-}
+import { selectedWork, site } from "@/data/site";
 
 export default function Home() {
   return (
     <main id="main" className="home-page">
-      {/* <CheckpointNav /> */}
-      <section id="intro" className="hero">
+      <section id="intro" className="hero" aria-labelledby="intro-title">
         <div className="hero-identity">
-          <Image
-            src="/kartik.jpg"
-            alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 rounded-full object-cover"
-          />
-          <h1 className="hero-name">{site.name}</h1>
-          <p className="t-lede">
-            Product Designer at <AutodeusChip />, building 0→1 products remotely.
-          </p>
+          <Image src="/kartik.jpg" alt="Kartik Jangid" width={56} height={56} preload className="hero-portrait" />
+          <p className="hero-name">{site.name}</p>
+          <h1 id="intro-title" className="t-hero">Product designer &amp; design engineer.</h1>
+          <p className="t-lede">{site.intro}</p>
         </div>
         <div className="hero-copy">
-          <p className="t-lede">
-            Previously, I built <BrandChip brand={brands.garga} href="#work" />, an
-            astrology product.
-          </p>
-          <p className="t-lede">
-            I’ve worked with teams at Tutedude, RoomsVital, and Iceberg Ice Creams.
-          </p>
-          <p className="t-lede">Based in Jaipur, Rajasthan.</p>
+          <p className="t-lede">Currently at Autodeus Technologies (Smartify), building Reepl. Previously at RoomsVital and Tutedude.</p>
+          <p className="hero-location">Based in {site.location} · Working remotely</p>
         </div>
-
         <HeroActions />
       </section>
 
-      <Stripe />
-
       <section id="work" aria-labelledby="work-title">
         <div className="work-section-heading">
-          <h2 id="work-title" className="t-section mb-0">
-            Featured work
-          </h2>
-          <Link href="/work" className="text-[15px]">
-            View all
-          </Link>
+          <div>
+            <h2 id="work-title" className="t-section">Selected work</h2>
+            <p className="section-description">Three Reepl releases. Three independent projects.</p>
+          </div>
+          <Link href="/work">All six studies ↗</Link>
         </div>
         <div className="work-grid">
-          {selectedWork.slice(0, 1).map((work) => (
-            <WorkTile key={work.slug} work={work} />
-          ))}
+          {selectedWork.map((work, index) => <WorkTile key={work.slug} work={work} eager={index === 0} />)}
         </div>
       </section>
 
-      <Stripe />
-
-      <footer id="contact" className="pane text-sm text-[var(--body)]">
+      <footer id="contact" className="pane home-contact">
+        <h2 className="t-section">Let’s build something useful.</h2>
+        <p>Have a product design or design engineering role in mind?</p>
+        <a className="contact-link" href={`mailto:${site.email}`}>{site.email} ↗</a>
         <div className="footer-row">
-          <p>Last updated <time dateTime="2026-09-27">September 27, 2026</time></p>
+          <p>Updated <time dateTime={site.updatedAt}>October 8, 2026</time></p>
           <ThemeToggle />
         </div>
       </footer>

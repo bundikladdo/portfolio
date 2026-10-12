@@ -27,7 +27,19 @@ export function MusicPlayer() {
         <span className="about-vinyl-hole" />
       </span>
       <div className="about-music-info">
-        <span className="about-music-title">{listeningTrack.title}</span>
+        <div className="about-music-heading">
+          <span className="about-music-title">{listeningTrack.title}</span>
+          <a
+            className="about-music-badge"
+            href={listeningTrack.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={listeningTrack.serviceLabel}
+            title={listeningTrack.serviceLabel}
+          >
+            <span className="about-music-badge-icon" aria-hidden="true" />
+          </a>
+        </div>
         <span className="about-music-artist">
           {listeningTrack.artist} · {listeningTrack.album}
         </span>
@@ -45,7 +57,7 @@ export function MusicPlayer() {
             RHAP_UI.PROGRESS_BAR,
             RHAP_UI.CURRENT_LEFT_TIME,
           ]}
-          customControlsSection={[RHAP_UI.VOLUME_CONTROLS]}
+          customControlsSection={[]}
           defaultCurrentTime="00:30"
           customIcons={{
             rewind: (
@@ -80,12 +92,6 @@ export function MusicPlayer() {
             {listeningTrack.unavailableLabel}
           </p>
         )}
-        <div className="about-music-source">
-          <span>{listeningTrack.previewLabel}</span>
-          <a href={listeningTrack.href} target="_blank" rel="noreferrer">
-            {listeningTrack.linkLabel} ↗
-          </a>
-        </div>
       </div>
     </div>
   );

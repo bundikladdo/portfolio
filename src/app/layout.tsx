@@ -1,28 +1,24 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { SmoothScroll } from "@/components/SmoothScroll";
 import { site } from "@/data/site";
-import "lenis/dist/lenis.css";
+import { isIndexable, siteUrl } from "@/lib/site-url";
 import "react-h5-audio-player/lib/styles.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: {
-    default: `${site.name}, ${site.role}`,
-    template: `%s — ${site.name}`,
-  },
-  description:
-    "Product designer and builder in Jaipur. Design engineer at Reepl. Founder of Garga. I take fuzzy things — charts, AI, tools — and make them checkable.",
+  metadataBase: new URL(siteUrl ?? "http://localhost:3000"),
+  title: { default: `${site.name} — ${site.role}`, template: `%s — ${site.name}` },
+  description: site.description,
   authors: [{ name: site.name }],
+  alternates: { canonical: "/" },
+  robots: { index: isIndexable, follow: isIndexable },
+  openGraph: { type: "website", locale: "en_IN", siteName: `${site.name} — Portfolio`, title: `${site.name} — Product designer & design engineer`, description: site.description, url: "/" },
+  twitter: { card: "summary_large_image", creator: "@bundi_k_laddo", title: `${site.name} — Product designer & design engineer`, description: site.description },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
           {`try {
@@ -35,14 +31,8 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <SmoothScroll>
-          <a className="sr-only focus:not-sr-only" href="#main">
-            Skip to content
-          </a>
-          <div className="frame">
-            {children}
-          </div>
-        </SmoothScroll>
+        <a className="skip-link" href="#main">Skip to content</a>
+        <div className="frame">{children}</div>
       </body>
     </html>
   );

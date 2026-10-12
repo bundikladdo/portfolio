@@ -1,77 +1,37 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/Button";
+import { HeroActions } from "@/components/HeroActions";
 import { MusicPlayer } from "@/components/MusicPlayer";
 import {
   aboutSnaps,
   booksRead,
-  caseStudies,
   jobs,
-  selectedWork,
   site,
 } from "@/data/site";
 
-const caseStudyProjects = selectedWork.filter(
-  (work) => work.case && caseStudies[work.slug],
-);
-const previousCase = caseStudyProjects.at(-1);
-const nextCase = caseStudyProjects[0];
-
 export const metadata: Metadata = {
   title: "About",
+  alternates: { canonical: "/about" },
   description: `About ${site.name}, product designer at Autodeus Technologies in Jaipur.`,
 };
 
 export default function AboutPage() {
   return (
     <main id="main" className="about-page">
-      <div className="case-study-back">
-        <Link href="/#work" className="case-study-avatar" aria-label="Back to work">
-          <Image
-            src="/kartik.jpg"
-            alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 rounded-full object-cover"
-          />
-        </Link>
-        {previousCase && nextCase && (
-          <nav className="case-study-switcher" aria-label="Other case studies">
-            <Button
-              href={`/work/${previousCase.slug}`}
-              variant="secondary"
-              aria-label={`Previous case study: ${previousCase.line}`}
-              title={`Previous: ${previousCase.line}`}
-            >
-              <span aria-hidden="true">←</span>
-            </Button>
-            <Button
-              href={`/work/${nextCase.slug}`}
-              variant="secondary"
-              aria-label={`Next case study: ${nextCase.line}`}
-              title={`Next: ${nextCase.line}`}
-            >
-              <span aria-hidden="true">→</span>
-            </Button>
-          </nav>
-        )}
-      </div>
+      <nav className="case-top-nav" aria-label="Portfolio navigation">
+        <Link href="/">← Home</Link>
+        <Link href="/work">Work</Link>
+        <Link href={site.resumeHref}>Resume</Link>
+      </nav>
 
       <header className="about-intro">
         <h1>About me</h1>
         <div className="about-copy">
-          <p>
-            I’m a product designer at Autodeus Technologies, building 0→1
-            products remotely. I work with early-stage teams to turn complex
-            ideas into clear, useful digital experiences.
-          </p>
-          <p>
-            Previously, I built Garga, an astrology product. I’ve also worked
-            with teams at Tutedude, RoomsVital, and Iceberg Ice Creams.
-          </p>
+          {site.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           <p>Based in {site.location}.</p>
         </div>
+        <HeroActions />
       </header>
 
       <section className="about-experience" aria-labelledby="about-experience-title">
