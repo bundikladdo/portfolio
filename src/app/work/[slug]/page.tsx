@@ -138,8 +138,8 @@ export default async function WorkPage({ params }: Props) {
                     )}
                     {section.image && (
                       <figure
-                        className={`case-study-image mt-6 overflow-hidden rounded-xl border border-hairline bg-[var(--surface)]${
-                          section.image.variant === "phone" ? " case-study-image--phone" : ""
+                        className={`case-study-image mt-6 overflow-hidden rounded-xl${
+                          section.image.variant === "phone" ? " case-study-image--phone" : " border border-hairline bg-[var(--surface)]"
                         }`}
                       >
                         {section.image.variant === "phone" ? (
@@ -159,9 +159,11 @@ export default async function WorkPage({ params }: Props) {
                             sizes="(max-width: 768px) 100vw, 900px"
                           />
                         )}
-                        <figcaption className="px-4 py-3 text-sm text-[var(--muted)]">
-                          {section.image.caption}
-                        </figcaption>
+                        {section.image.variant !== "phone" && (
+                          <figcaption className="px-4 py-3 text-sm text-[var(--muted)]">
+                            {section.image.caption}
+                          </figcaption>
+                        )}
                       </figure>
                     )}
                   </div>

@@ -100,7 +100,7 @@ export type WorkCard = {
 export const selectedWork: WorkCard[] = [
   {
     slug: "reepl-mobile",
-    line: "Reepl Mobile: Ship the daily loop in 17 days",
+    line: "Reepl Mobile: Build the daily loop in 17 days",
     about: "AI-first design & development",
     year: "2026",
     visual: "dotted-grid",
@@ -223,9 +223,9 @@ export const jobs: Job[] = [
       {
         slug: "reepl-mobile",
         title: "Reepl Mobile",
-        status: "live",
+        status: "wip",
         description:
-          "A native iOS and Android app that turns Andy’s daily draft into a 30-second approve, edit, publish loop.",
+          "A native iOS and Android app built around reviewing and publishing Andy’s daily draft. Not yet in production.",
       },
     ],
   },
@@ -290,21 +290,21 @@ type CaseStudy = {
 export const caseStudies: Record<string, CaseStudy> = {
   "reepl-mobile": {
     problem:
-      "Reepl’s AI ghostwriter, Andy, drafted a LinkedIn post every day, but only [22%] were approved within 24 hours. Approving one meant opening a laptop, and busy founders often did not.",
+      "Reviewing Andy’s daily LinkedIn drafts depended on the web app. The mobile app brings review, feedback, and publishing into a focused flow on a phone.",
     shipped:
-      "A native iOS and Android app that made the daily approval loop fast enough to complete from a phone: push notification → read Andy’s draft → approve or edit → publish → keep the streak alive.",
+      "Built a native iOS and Android app around this flow: push notification → read Andy’s draft → approve or edit → publish → see the streak. The app is not yet in production.",
     outcome:
-      "Draft figures for the 30-day review: approvals within 24 hours [22% → 68%], posts per user per week [1.4 → 3.9], and median streak [2 → 7 days].",
+      "Built, not yet in production. Adoption, publishing frequency, and retention have not been measured.",
     url: "https://reepl.io",
     story: {
-      title: "Reepl Mobile: the 30-second daily loop",
+      title: "Reepl Mobile: the daily publishing loop",
       subtitle:
-        "I designed and built Reepl’s native iOS and Android app in 17 days. [64%] of daily post approvals moved from laptop to phone.",
+        "I designed and built Reepl’s native iOS and Android app in 17 days. The app is built but not yet in production; this case study covers the design and implementation, with impact still to be measured.",
       metadata: [
         { label: "Role", value: "Sole designer and engineer" },
-        { label: "Timeline", value: "14 Sep – 1 Oct 2026 · 100 commits" },
+        { label: "Timeline", value: "14 Sep – 1 Oct 2026" },
         { label: "Stack", value: "Expo, React Native, TypeScript, Claude Code" },
-        { label: "Status", value: "Launched" },
+        { label: "Status", value: "Built · Not yet in production" },
       ],
       artwork: {
         src: "/work/reepl-mobile/home.png",
@@ -329,7 +329,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-problem",
           title: "The problem",
           paragraphs: [
-            "Andy already did the hard part: writing a daily LinkedIn draft. But the approval moment was trapped on desktop. Only [22%] of drafts were approved within 24 hours, and the people who were most likely to miss the window were the people with the least time to open a laptop.",
+            "Andy already writes the daily LinkedIn draft. I focused the mobile app on the next step: reviewing it, giving feedback, and choosing when to publish without opening a laptop. Whether this improves approval speed or consistency needs to be tested after launch.",
           ],
           image: {
             src: "/work/reepl-mobile/home.png",
@@ -342,16 +342,16 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
         {
           id: "mobile-insight",
-          title: "The insight",
+          title: "The design hypothesis",
           paragraphs: [
-            "In [8] interviews, users said they did not want to write on their phones. They wanted to say yes. [71%] of approvals on the web were already one tap with no edits, so mobile did not need a full authoring surface first — it needed a confident review surface.",
+            "I treated mobile as a review surface first, keeping the draft, feedback, and publishing actions together instead of recreating every web feature. The hypothesis is that a focused review flow will make the daily task easier to complete; it has not yet been validated in production.",
           ],
         },
         {
           id: "mobile-loop",
           title: "A small loop with a clear finish",
           paragraphs: [
-            "The app was designed around one repeatable job: help someone review and publish Andy’s next post in about 30 seconds. Every screen supports that sequence or helps the user understand what their consistency is building.",
+            "The app was designed around one repeatable job: review and publish Andy’s next post. Every screen supports that sequence or makes the user’s publishing activity visible. Completion time remains a measurement for testing and launch.",
           ],
           list: [
             "Push notification brings the review moment to the user.",
@@ -376,7 +376,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "Native first, in Reepl’s colours: system headers, sheets, and menus, with HugeIcons on both platforms.",
             "One post card everywhere: Home, Calendar, and Content show posts the same way.",
             "Platform-honest: native long-press menus on iOS, and Reepl’s own design-system overlays on Android.",
-            "Tokens, not literal values: [40+] hard-coded sizes became [9] type roles.",
+            "Shared type and spacing tokens keep the native screens consistent.",
             "One-tap approve: times are picked from a menu instead of a date picker.",
           ],
           image: {
@@ -395,7 +395,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "The fastest route was not just shipping screens. I fixed the rough edges that would have made a small app feel unreliable on its most important path.",
           ],
           list: [
-            "Fixed Google sign-in failing on the first tap and Home loading as a cascade of spinners; [sign-in drop-off went from 18% to 4%].",
+            "Fixed Google sign-in failing on the first tap and Home loading as a cascade of spinners during development.",
             "Fixed pages opening already scrolled under the header and the Android keyboard hiding the Andy chat box.",
             "Ported the web app’s data mapping so photos and organisations show up the same way on both apps.",
           ],
@@ -404,30 +404,19 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-ai-workflow",
           title: "AI in the workflow",
           paragraphs: [
-            "Claude Code handled repetitive refactors and first-draft Android ports. I made the design calls, reviewed the implementation, and checked every change on the simulator. That saved about [6 days] without outsourcing the product decisions to the tool.",
+            "Claude Code handled repetitive refactors and first-draft Android ports. I made the design calls, reviewed the implementation, and checked changes on the simulator. I have not measured the time saved by this workflow.",
           ],
-          videoPlaceholder: {
-            title: "App walkthrough",
-            body: "A short walkthrough video will live here once the final recording is ready.",
-            label: "Video placeholder · replace with the final app experience recording",
-          },
         },
         {
           id: "mobile-outcome",
-          title: "Outcome · [30 days] after launch",
+          title: "Current state",
           paragraphs: [
-            "These bracketed figures are draft placeholders for the 30-day review and still need confirmation.",
-          ],
-          metrics: [
-            { value: "[22%] → [68%]", label: "Approved within 24 hours" },
-            { value: "[1.4] → [3.9]", label: "Posts per user per week" },
-            { value: "[2 days] → [7 days]", label: "Median streak" },
-            { value: "[64%]", label: "Of daily approvals moved to phone" },
+            "The app is built but has not gone into production. The screens show the implemented experience, including sample streak data. There are no production results to report yet.",
           ],
           image: {
             src: "/work/reepl-mobile/streak.png",
-            alt: "Reepl mobile weekly goal screen showing a 23 day streak and activity heatmap",
-            caption: "The streak turns a one-tap approval into a habit users can see accumulating.",
+            alt: "Reepl mobile weekly goal screen showing sample streak data and an activity heatmap",
+            caption: "The built streak interface uses sample data; it does not represent measured user results.",
             width: 1206,
             height: 2622,
             variant: "phone",
@@ -437,7 +426,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-next",
           title: "What I’d do next",
           paragraphs: [
-            "Measure success from day one instead of afterwards, and test the approve flow with users before polishing the Android version. The next useful questions are where people pause in the review loop, which notifications earn a return, and when editing is worth the extra tap.",
+            "Before production, test the approve flow with users and check where they pause, when they need to edit, and whether the publishing actions are clear. After launch, measure review completion time, approval rate, publishing frequency, and return usage before making impact claims.",
           ],
         },
       ],
