@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "check:portfolio": "node --experimental-strip-types scripts/check-portfolio.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "lenis": "^1.3.26",

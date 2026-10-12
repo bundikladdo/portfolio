@@ -4,11 +4,9 @@ import type { WorkCard } from "@/data/site";
 export function ReeplThumbnail({
   artwork,
   artworks,
-  eager = false,
 }: {
   artwork?: WorkCard["artwork"];
   artworks?: WorkCard["artworks"];
-  eager?: boolean;
 }) {
   const image = artwork ?? {
     src: "/work/reepl-case-study/onboarding-thumbnail.svg",
@@ -26,8 +24,7 @@ export function ReeplThumbnail({
             alt=""
             width={phone.width}
             height={phone.height}
-            sizes="(max-width: 640px) 35vw, 230px"
-            loading={eager ? "eager" : "lazy"}
+            unoptimized
             className={`work-card-phone-shot work-card-phone-shot--${index + 1}`}
           />
         ))}
@@ -45,8 +42,7 @@ export function ReeplThumbnail({
         alt=""
         width={image.width}
         height={image.height}
-        sizes="(max-width: 640px) 100vw, 600px"
-        loading={eager ? "eager" : "lazy"}
+        unoptimized
         className="work-card-thumbnail-art"
       />
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const KEY = "portfolio-sound-v2";
 const interactiveSelector = "a, button, [role='button']";
@@ -13,31 +13,30 @@ function playCue(source: HTMLAudioElement | null, volume: number) {
   void sound.play().catch(() => {});
 }
 
-function getSoundSnapshot() {
-  try {
-    return localStorage.getItem(KEY) === "on";
-  } catch {
-    return false;
-  }
-}
-
-function subscribe(onChange: () => void) {
-  window.addEventListener("portfolio-sound-change", onChange);
-  return () => window.removeEventListener("portfolio-sound-change", onChange);
-}
-
-function getServerSnapshot() {
-  return false;
-}
-
 export function SoundToggle() {
-  const on = useSyncExternalStore(subscribe, getSoundSnapshot, getServerSnapshot);
+  const [on, setOn] = useState(true);
+  const [ready, setReady] = useState(false);
+  const onRef = useRef(true);
   const hoverRef = useRef<HTMLAudioElement>(null);
   const clickRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
+    const stored = localStorage.getItem(KEY);
+    const enabled = stored !== "off";
+    setOn(enabled);
+    onRef.current = enabled;
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    onRef.current = on;
+    if (!ready) return;
+    localStorage.setItem(KEY, on ? "on" : "off");
+  }, [on, ready]);
+
+  useEffect(() => {
     const onPointerOver = (event: PointerEvent) => {
-      if (!getSoundSnapshot() || !(event.target instanceof Element)) return;
+      if (!onRef.current || !(event.target instanceof Element)) return;
       const target = event.target.closest(interactiveSelector);
       if (!target) return;
       if (event.relatedTarget instanceof Node && target.contains(event.relatedTarget)) {
@@ -46,7 +45,7 @@ export function SoundToggle() {
       playCue(hoverRef.current, 0.12);
     };
     const onClick = (event: MouseEvent) => {
-      if (!getSoundSnapshot() || !(event.target instanceof Element)) return;
+      if (!onRef.current || !(event.target instanceof Element)) return;
       const target = event.target.closest(interactiveSelector);
       if (!target) return;
       playCue(clickRef.current, 0.2);
@@ -62,8 +61,8 @@ export function SoundToggle() {
 
   return (
     <>
-      <audio aria-hidden="true" ref={hoverRef} src="/audio/hover.wav" preload="none" />
-      <audio aria-hidden="true" ref={clickRef} src="/audio/click.wav" preload="none" />
+      <audio aria-hidden="true" ref={hoverRef} src="/audio/hover.wav" preload="auto" />
+      <audio aria-hidden="true" ref={clickRef} src="/audio/click.wav" preload="auto" />
       <button
         type="button"
         className="inline-flex h-8 w-8 items-center justify-center rounded-full text-[var(--ink)] hover:bg-[var(--surface)]"
@@ -71,10 +70,9 @@ export function SoundToggle() {
         aria-pressed={on}
         title={on ? "Mute interface sounds" : "Unmute interface sounds"}
         onClick={() => {
-          try {
-            localStorage.setItem(KEY, on ? "off" : "on");
-            window.dispatchEvent(new Event("portfolio-sound-change"));
-          } catch {}
+          const next = !onRef.current;
+          onRef.current = next;
+          setOn(next);
         }}
       >
         {on ? <SpeakerOn /> : <SpeakerOff />}

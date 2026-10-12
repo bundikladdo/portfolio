@@ -1,16 +1,8 @@
 export const site = {
   name: "Kartik Jangid",
-  role: "Product designer & design engineer",
-  description: "Kartik Jangid is a product designer and design engineer in Jaipur, designing and building early-stage products across AI, SaaS, and mobile.",
-  resumeHref: "/resume",
-  updatedAt: "2026-10-08",
-  intro: "I turn early-stage ideas into useful products, from the first flow to the shipped interface.",
-  bio: [
-    "I’m a product designer at Autodeus Technologies (Smartify), working remotely on Reepl. I own flows, interfaces, and design systems, and work directly in code to carry the design through to release.",
-    "Alongside my product work, I built Garga and Toolnest and explored a more transparent way to tailor resumes with FormPilot.",
-  ],
+  role: "Product designer who ships",
   location: "Jaipur, Rajasthan",
-  email: "jangidkartik002@gmail.com",
+  email: "support@garga.app",
   headline: [
     "Product Designer working with",
     "early-stage startups to build 0→1 products.",
@@ -77,7 +69,10 @@ export const brands = {
 } as const;
 
 export const autodeusProducts = [
+  { name: "Smartify", href: "https://smartify.in", image: "/products/smartify.png" },
   { name: "Reepl", href: "https://reepl.io", image: "/reepl.png" },
+  { name: "Inferenc", href: "https://infernec.com", image: "/products/inferenc.png" },
+  { name: "Verk", href: "https://verkapp.com", image: "/products/verk.png" },
 ] as const;
 
 export type Project = {
@@ -95,8 +90,6 @@ export type WorkCard = {
   line: string;
   about: string;
   year: string;
-  discipline: string;
-  status: string;
   image?: string;
   visual?: "dotted-grid";
   artwork?: { src: string; width: number; height: number };
@@ -107,10 +100,8 @@ export type WorkCard = {
 export const selectedWork: WorkCard[] = [
   {
     slug: "reepl-mobile",
-    line: "Reepl Mobile · A daily publishing loop",
-    about: "Designed and built a native review-and-publish app in 17 days.",
-    discipline: "Mobile · Design + engineering",
-    status: "Shipped",
+    line: "Reepl Mobile: Ship the daily loop in 17 days",
+    about: "AI-first design & development",
     year: "2026",
     visual: "dotted-grid",
     artwork: {
@@ -127,20 +118,16 @@ export const selectedWork: WorkCard[] = [
   },
   {
     slug: "reepl-onboarding",
-    line: "Reepl Onboarding · Value before commitment",
-    about: "A personalized product demo before the paid-trial decision.",
-    discipline: "SaaS · Activation",
-    status: "Live",
+    line: "Reepl Onboarding: Show the Product Before Asking for the Commitment",
+    about: "AI First Design & Development",
     year: "2026",
     visual: "dotted-grid",
     case: true,
   },
   {
     slug: "reepl-contacts",
-    line: "Reepl Contacts · Relationships with context",
-    about: "Turn saved LinkedIn contacts into an actionable relationship workflow.",
-    discipline: "SaaS · Product strategy",
-    status: "Shipped",
+    line: "Reepl Contacts: CRM from the Ground Up",
+    about: "CRM Design & Product Strategy",
     year: "2026",
     visual: "dotted-grid",
     artwork: {
@@ -152,34 +139,35 @@ export const selectedWork: WorkCard[] = [
   },
   {
     slug: "garga",
-    line: "Garga · Calculation before conversation",
-    about: "An astrology product with AI narration grounded in calculated charts.",
-    discipline: "Independent · Design + engineering",
-    status: "Built",
+    line: "Swiss Ephemeris under the chat — not vibes",
+    about: "Building, designing and coding",
     year: "2025",
-    image: "/garga.png",
+    image: "/backgrounds/pixel-blast.png",
     case: true,
   },
   {
     slug: "toolnest",
-    line: "Toolnest · Seven tools, no signup",
-    about: "A focused utility collection that gets straight to the task.",
-    discipline: "Independent · Utility design",
-    status: "Built",
+    line: "Seven tools. No signup.",
+    about: "Building, designing and coding",
     year: "2026",
-    image: "/toolnest.png",
+    image: "/backgrounds/pixel-blast.png",
     case: true,
   },
   {
-    slug: "formpilot",
-    line: "FormPilot · Every AI edit explained",
-    about: "A resume-tailoring workflow built around review, accuracy, and control.",
-    discipline: "Independent · AI interaction design",
-    status: "Prototype",
+    slug: "vizzly",
+    line: "Every AI change explained",
+    about: "Product design research",
     year: "2026",
+    image: "/backgrounds/pixel-blast.png",
     case: true,
   },
-
+  {
+    slug: "ui-blocks",
+    line: "Production screens for React teams",
+    about: "Product design research",
+    year: "2026",
+    image: "/backgrounds/pixel-blast.png",
+  },
 ];
 
 export const featuredWork: WorkCard[] = [
@@ -202,7 +190,7 @@ export type Job = {
 export const jobs: Job[] = [
   {
     id: "smartify",
-    company: "Autodeus Technologies (Smartify)",
+    company: "Smartify",
     color: "#26251e",
     period: "Dec 2024 — Present",
     origin: "Ahmedabad",
@@ -213,7 +201,7 @@ export const jobs: Job[] = [
       status: "live",
       highlight: "Claude → drafts, you still hit publish",
       description:
-        "Product design and implementation for Reepl, an AI LinkedIn platform. Work spans onboarding, mobile publishing, and relationship management.",
+        "Solo designer in a 2-person team. AI LinkedIn SaaS: 24+ routes, 7 languages, 10,000+ users.",
       href: "https://reepl.io",
       case: true,
     },
@@ -237,7 +225,7 @@ export const jobs: Job[] = [
         title: "Reepl Mobile",
         status: "live",
         description:
-          "A native iOS and Android app that turns Andy’s daily draft into a focused approve, edit, and publish loop.",
+          "A native iOS and Android app that turns Andy’s daily draft into a 30-second approve, edit, publish loop.",
       },
     ],
   },
@@ -280,18 +268,16 @@ type CaseStudySection = {
     variant?: "phone";
   };
   video?: { src: string; poster: string; ariaLabel: string };
+  videoPlaceholder?: { title: string; body: string; label: string };
 };
 
-export type CaseStudy = {
-  role: string;
-  scope: string;
-  evidence: string;
+type CaseStudy = {
   problem: string;
   shipped: string;
   outcome: string;
   image?: string;
   url?: string;
-  story: {
+  story?: {
     title: string;
     subtitle: string;
     metadata: { label: string; value: string }[];
@@ -303,23 +289,20 @@ export type CaseStudy = {
 
 export const caseStudies: Record<string, CaseStudy> = {
   "reepl-mobile": {
-    role: "Sole designer and engineer",
-    scope: "Native iOS and Android · 17 days",
-    evidence: "Implementation and screen examples are shown below. Adoption and retention results are not yet available.",
     problem:
-      "Reepl’s AI ghostwriter, Andy, prepared daily LinkedIn drafts, but reviewing and approving them depended on opening the web app. The opportunity was to make that decision available on a phone.",
+      "Reepl’s AI ghostwriter, Andy, drafted a LinkedIn post every day, but only [22%] were approved within 24 hours. Approving one meant opening a laptop, and busy founders often did not.",
     shipped:
       "A native iOS and Android app that made the daily approval loop fast enough to complete from a phone: push notification → read Andy’s draft → approve or edit → publish → keep the streak alive.",
     outcome:
-      "Built a native review-and-publish workflow in 17 days, with shared post cards, calendar review, and visible publishing streaks.",
+      "Draft figures for the 30-day review: approvals within 24 hours [22% → 68%], posts per user per week [1.4 → 3.9], and median streak [2 → 7 days].",
     url: "https://reepl.io",
     story: {
-      title: "Reepl Mobile: bringing the daily publishing loop to a phone",
+      title: "Reepl Mobile: the 30-second daily loop",
       subtitle:
-        "I designed and built a native iOS and Android app in 17 days, centered on reviewing Andy’s draft, editing when needed, and choosing when to publish.",
+        "I designed and built Reepl’s native iOS and Android app in 17 days. [64%] of daily post approvals moved from laptop to phone.",
       metadata: [
         { label: "Role", value: "Sole designer and engineer" },
-        { label: "Timeline", value: "14 Sep – 1 Oct 2026" },
+        { label: "Timeline", value: "14 Sep – 1 Oct 2026 · 100 commits" },
         { label: "Stack", value: "Expo, React Native, TypeScript, Claude Code" },
         { label: "Status", value: "Launched" },
       ],
@@ -346,7 +329,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-problem",
           title: "The problem",
           paragraphs: [
-            "Andy already prepared a daily draft. The remaining job was a human decision: is this something I want to publish? Requiring a desktop session added another step between a prepared post and that decision.",
+            "Andy already did the hard part: writing a daily LinkedIn draft. But the approval moment was trapped on desktop. Only [22%] of drafts were approved within 24 hours, and the people who were most likely to miss the window were the people with the least time to open a laptop.",
           ],
           image: {
             src: "/work/reepl-mobile/home.png",
@@ -361,14 +344,14 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-insight",
           title: "The insight",
           paragraphs: [
-            "I framed mobile around a narrower job than the web app: review an existing draft and decide what to do next. That led to a focused review surface instead of rebuilding the full authoring workspace. Whether this improves approval frequency needs to be measured.",
+            "In [8] interviews, users said they did not want to write on their phones. They wanted to say yes. [71%] of approvals on the web were already one tap with no edits, so mobile did not need a full authoring surface first — it needed a confident review surface.",
           ],
         },
         {
           id: "mobile-loop",
           title: "A small loop with a clear finish",
           paragraphs: [
-            "The app was designed around one repeatable job: help someone review and publish Andy’s next post in a short mobile session. Every screen supports that sequence or helps the user understand what their consistency is building.",
+            "The app was designed around one repeatable job: help someone review and publish Andy’s next post in about 30 seconds. Every screen supports that sequence or helps the user understand what their consistency is building.",
           ],
           list: [
             "Push notification brings the review moment to the user.",
@@ -393,7 +376,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "Native first, in Reepl’s colours: system headers, sheets, and menus, with HugeIcons on both platforms.",
             "One post card everywhere: Home, Calendar, and Content show posts the same way.",
             "Platform-honest: native long-press menus on iOS, and Reepl’s own design-system overlays on Android.",
-            "Shared type roles instead of scattered literal sizes, keeping screens consistent across platforms.",
+            "Tokens, not literal values: [40+] hard-coded sizes became [9] type roles.",
             "One-tap approve: times are picked from a menu instead of a date picker.",
           ],
           image: {
@@ -412,7 +395,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "The fastest route was not just shipping screens. I fixed the rough edges that would have made a small app feel unreliable on its most important path.",
           ],
           list: [
-            "Fixed Google sign-in failing on the first tap and Home loading as a cascade of spinners.",
+            "Fixed Google sign-in failing on the first tap and Home loading as a cascade of spinners; [sign-in drop-off went from 18% to 4%].",
             "Fixed pages opening already scrolled under the header and the Android keyboard hiding the Andy chat box.",
             "Ported the web app’s data mapping so photos and organisations show up the same way on both apps.",
           ],
@@ -421,16 +404,25 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-ai-workflow",
           title: "AI in the workflow",
           paragraphs: [
-            "Claude Code helped with repetitive refactors and first-draft Android ports. I made the design decisions, reviewed the implementation, and checked changes on the simulator. I kept responsibility for navigation, platform behavior, and the final review experience.",
+            "Claude Code handled repetitive refactors and first-draft Android ports. I made the design calls, reviewed the implementation, and checked every change on the simulator. That saved about [6 days] without outsourcing the product decisions to the tool.",
           ],
-
+          videoPlaceholder: {
+            title: "App walkthrough",
+            body: "A short walkthrough video will live here once the final recording is ready.",
+            label: "Video placeholder · replace with the final app experience recording",
+          },
         },
         {
           id: "mobile-outcome",
-          title: "What shipped and what needs measuring",
+          title: "Outcome · [30 days] after launch",
           paragraphs: [
-            "The delivery is a native approval workflow, not a measured retention claim. Screens below show the implemented experience; a longer post-launch observation period is needed to assess behavior.",
-            "I would compare approval within 24 hours, posts published per active user, and return rate across equivalent pre- and post-launch cohorts. The analysis should distinguish mobile adoption from changes in the overall user base.",
+            "These bracketed figures are draft placeholders for the 30-day review and still need confirmation.",
+          ],
+          metrics: [
+            { value: "[22%] → [68%]", label: "Approved within 24 hours" },
+            { value: "[1.4] → [3.9]", label: "Posts per user per week" },
+            { value: "[2 days] → [7 days]", label: "Median streak" },
+            { value: "[64%]", label: "Of daily approvals moved to phone" },
           ],
           image: {
             src: "/work/reepl-mobile/streak.png",
@@ -452,15 +444,12 @@ export const caseStudies: Record<string, CaseStudy> = {
     },
   },
   "reepl-onboarding": {
-    role: "Product designer, working alongside engineering",
-    scope: "Onboarding and activation · 2 weeks",
-    evidence: "Before-and-after walkthroughs show the flow change. A conversion lift is not claimed without a confirmed cohort and measurement window.",
     problem: "People had to choose a paid trial before seeing what Reepl could do. The old onboarding collected their goals but showed everyone the same screens, so they had little context for that decision.",
     shipped: "A goal-based onboarding flow with a personalized demo of Andy and Routines before activation.",
     outcome: "Live. The flow now shows relevant product value before users choose an activation path.",
     url: "https://reepl.io",
     story: {
-      title: "Reepl Onboarding: show the value before the commitment",
+      title: "Reepl Onboarding: Show the Product Before Asking for the Commitment",
       subtitle: "Reepl asked users to start a paid trial before they had seen the product work. I redesigned onboarding around each user’s stated goal and added a personalized Andy demo before plan selection.",
       metadata: [
         { label: "Duration", value: "2 weeks" },
@@ -549,9 +538,9 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
         {
           id: "activation-options",
-          title: "Plan selection at the time of the redesign",
+          title: "Plan selection",
           paragraphs: [
-            "At the time of this redesign, the activation options stayed the same: 7 days of Premium with a one-time $1 payment, 3 days of Premium with the user’s own AI API key, or the Free plan. These are the project’s historical constraints, not a current pricing offer.",
+            "The activation options stayed the same. Users can start Premium for 7 days with a one-time $1 payment, use their own AI API key for 3 days of Premium, or continue on the Free plan.",
           ],
         },
         {
@@ -574,9 +563,6 @@ export const caseStudies: Record<string, CaseStudy> = {
     },
   },
   "reepl-contacts": {
-    role: "Product designer",
-    scope: "0→1 CRM · Contact organization and integrations",
-    evidence: "The interface and workflow are documented here. Follow-up completion and CRM sync success still need outcome measurement.",
     problem:
       "Reepl users were building larger LinkedIn networks, but LinkedIn made it difficult to remember who mattered, what happened in previous conversations, and who needed a follow-up. That led to lost leads, forgotten conversations, and no clear way to prioritize relationships.",
     shipped:
@@ -646,25 +632,6 @@ export const caseStudies: Record<string, CaseStudy> = {
           ],
         },
         {
-          id: "relationship-decisions",
-          title: "Decisions and trade-offs",
-          paragraphs: [
-            "The scope was a relationship layer within Reepl, with external CRMs remaining the destination for broader sales operations. That kept the design question focused on context and the next action.",
-          ],
-          list: [
-            "Keep lists, notes, status, and follow-up near the contact instead of splitting relationship context across separate tools.",
-            "Carry the context of a saved LinkedIn contact into the people view, rather than treating it as a new, blank record.",
-            "Connect to Zoho and HubSpot rather than expanding this release into every feature of a traditional CRM.",
-          ],
-          image: {
-            src: "/work/reepl-case-study/contacts-thumbnail.png",
-            alt: "Reepl Contacts interface showing the people view and relationship organization",
-            caption: "The centralized people view brings contact organization into the existing Reepl workflow.",
-            width: 1044,
-            height: 615,
-          },
-        },
-        {
           id: "relationship-why-it-matters",
           title: "Why it matters",
           paragraphs: [
@@ -672,156 +639,29 @@ export const caseStudies: Record<string, CaseStudy> = {
             "A contact saved during research or outreach can become an organized, contextualized lead and then move into Zoho, HubSpot, or the team’s existing system without the same manual re-entry. Reepl becomes the relationship layer that makes the next action clear.",
           ],
         },
-        {
-          id: "relationship-evaluation",
-          title: "Outcome and next validation",
-          paragraphs: [
-            "The shipped workflow connects saving, organizing, following up, and handing contacts to an external CRM. That is the delivery outcome; a revenue or lead-conversion effect has not been established here.",
-            "Next I would test whether users can find a contact’s last interaction, choose a follow-up, and complete a CRM handoff without losing context. Useful measures would be task completion, follow-up completion, and sync failures.",
-          ],
-        },
       ],
     },
   },
   garga: {
-    role: "Founder, designer, and builder",
-    scope: "Independent product · Chart calculation, reports, and chat",
-    evidence: "The product interface and calculation-to-narration architecture are shown here. No accuracy benchmark or commercial growth result is claimed.",
-    problem: "An AI-generated astrology reading can sound convincing even when its underlying chart is inconsistent. The design challenge was to ground the conversation in a repeatable calculation.",
-    shipped: "A product that calculates charts with Swiss Ephemeris and a logic layer before generating AI narration, with paid reports and chat.",
-    outcome: "Built a calculation-first product with a clear separation between chart data and AI interpretation.",
+    problem:
+      "Most AI astrology apps hallucinate. Ask twice, get two lives. People who care about the tradition deserve the chart to be real.",
+    shipped:
+      "Swiss Ephemeris + a logic engine, then AI narration attached to the math. Reports and chat, paid.",
+    outcome:
+      "Live on garga.app. I am a designer who respects the source — not a pandit.",
     image: "/garga.png",
     url: "https://garga.app",
-    story: {
-      title: "Garga: calculation before conversation",
-      subtitle: "I built an astrology product around a trust problem: a fluent AI answer should not invent the chart it is interpreting.",
-      metadata: [
-        { label: "Role", value: "Founder, designer, and builder" },
-        { label: "Year", value: "2025" },
-        { label: "Scope", value: "Chart engine, reports, and chat" },
-        { label: "Type", value: "Independent product" },
-      ],
-      sections: [
-        {
-          id: "garga-problem", title: "The trust problem",
-          paragraphs: ["The core concern was consistency. If the same birth details can produce a different underlying chart each time, a polished conversation hides a basic product failure. I treated the chart calculation and the generated interpretation as separate responsibilities."],
-        },
-        {
-          id: "garga-system", title: "A calculation-first system",
-          paragraphs: ["Swiss Ephemeris supplies the astronomical calculations. A logic layer organizes the chart, and AI narration works from that structured information. The model’s role is to explain the result; it is not the source of the planetary positions."],
-          list: ["Birth details → calculated chart → structured interpretation → report or conversation.", "Keep repeatable source data separate from generated language.", "Use the same chart context across reports and follow-up questions."],
-          image: { src: "/garga.png", alt: "Garga birth-chart interface showing calculated planetary placements", caption: "A calculated birth chart provides a shared reference for reports and conversation.", width: 792, height: 685 },
-        },
-        {
-          id: "garga-tradeoffs", title: "The design trade-off",
-          paragraphs: ["A free-form chatbot is easy to start with, but it makes the answer’s source harder to reason about. Grounding narration in calculated chart data adds implementation work while giving the conversation a consistent reference point.", "That boundary also limits the claim: a deterministic chart calculation does not establish the validity of an astrological interpretation. The product should make that distinction understandable."],
-        },
-        {
-          id: "garga-outcome", title: "Delivery and next validation",
-          paragraphs: ["The delivered scope includes chart calculations, reports, paid access, and chat. This case study describes that implementation rather than claiming a measured improvement in trust or revenue.", "Next I would evaluate repeated calculations for the same inputs, test time-zone and birth-time edge cases, and ask users whether they can distinguish calculated chart facts from generated interpretation."],
-        },
-      ],
-    },
   },
   toolnest: {
-    role: "Designer and builder",
-    scope: "Independent product · Seven utilities",
-    evidence: "The available product interface is shown below. Task-time, adoption, and privacy outcomes have not been quantified.",
-    problem: "A quick utility task can turn into an account-creation flow or a search through advertising. The tool should be easier to use than the workaround.",
-    shipped: "A focused collection of seven micro-tools with no signup and local processing where practical.",
-    outcome: "Built seven utilities around direct access to the task, without an account requirement.",
+    problem: "Utility sites are ad farms or SaaS landings.",
+    shipped: "A small, opinionated set of micro-tools. Local where possible.",
+    outcome: "Seven tools. No signup. That’s it.",
     image: "/toolnest.png",
-    story: {
-      title: "Toolnest: seven tools, straight to the task",
-      subtitle: "I designed and built a small utility collection around one constraint: people should be able to do the job without creating an account.",
-      metadata: [
-        { label: "Role", value: "Designer and builder" },
-        { label: "Year", value: "2026" },
-        { label: "Scope", value: "Seven micro-tools" },
-        { label: "Type", value: "Independent product" },
-      ],
-      sections: [
-        {
-          id: "toolnest-problem", title: "A small task deserves a short path",
-          paragraphs: ["People open a utility to get a result, not to learn a new product. An account gate or a crowded landing page adds work before the task has even begun. Toolnest’s brief was to keep that path direct."],
-        },
-        {
-          id: "toolnest-scope", title: "Scope as a design decision",
-          paragraphs: ["I kept the collection to seven tools instead of turning it into an endless directory. The shared product promise is simple: find the utility, provide the input, and use the result."],
-          list: ["No signup before using a tool.", "A focused collection instead of a large catalog to navigate.", "Local processing where practical, without implying every tool runs entirely on-device."],
-          image: { src: "/toolnest.png", alt: "Toolnest word and character counter with live results, copy, and clear actions", caption: "The word and character counter shows results next to the input. This screen also includes advertising and an optional Pro offer.", width: 1280, height: 1457 },
-        },
-        {
-          id: "toolnest-tradeoffs", title: "What the simplicity costs",
-          paragraphs: ["Removing an account requirement means the experience cannot depend on a signed-in profile. The useful result has to stand on its own in the current session.", "The word counter screen includes ad placements and an optional Pro offer. The next design iteration should keep those secondary to the task and test whether they distract from the result. Local processing is a per-tool choice, not a blanket privacy claim."],
-        },
-        {
-          id: "toolnest-outcome", title: "Delivery and next validation",
-          paragraphs: ["The delivered scope is seven tools with direct access and no signup. The artifact demonstrates the interface; it does not establish faster task completion or sustained adoption.", "I would next test first-use task completion, time to a usable result, invalid-input recovery, and keyboard access for each utility."],
-        },
-      ],
-    },
   },
-  formpilot: {
-    role: "Product designer and builder",
-    scope: "Independent prototype · AI-assisted resume tailoring",
-    evidence: "This study describes the review workflow. Hiring outcomes and factual-accuracy rates have not been established.",
-    problem: "AI resume tailoring can change someone’s meaning or introduce unsupported claims, leaving the applicant to audit a complete rewrite.",
-    shipped: "A review workflow that explains proposed changes, keeps the applicant in control, and supports PDF export.",
-    outcome: "Built an explain-and-review approach to tailoring rather than treating generated text as a final resume.",
+  vizzly: {
+    problem: "Resume tailoring with AI usually rewrites you into a stranger.",
+    shipped: "A review loop: every change explained, nothing fabricated, export a PDF.",
+    outcome: "Public as FormPilot. Open source.",
     url: "https://formpilot-web-peach.vercel.app",
-    story: {
-      title: "FormPilot: every AI edit needs a reason",
-      subtitle: "An exploration of resume tailoring that helps an applicant review changes without losing their own experience and voice. Previously called Vizzly.",
-      metadata: [
-        { label: "Role", value: "Product designer and builder" },
-        { label: "Year", value: "2026" },
-        { label: "Scope", value: "Review workflow and PDF export" },
-        { label: "Type", value: "Independent prototype" },
-      ],
-      sections: [
-        {
-          id: "formpilot-problem", title: "The cost of a complete rewrite",
-          paragraphs: ["A generated resume may sound polished while overstating a skill or changing the substance of an achievement. If the applicant has to compare every sentence from scratch, automation has moved the work rather than removed it."],
-        },
-        {
-          id: "formpilot-loop", title: "Make the change reviewable",
-          paragraphs: ["The design centers on a review loop: propose a change, explain its purpose, let the applicant check it, and export the reviewed resume. The original experience remains the reference for deciding whether an edit belongs."],
-          list: ["Start from the applicant’s existing experience.", "Explain why a proposed edit is relevant.", "Give the applicant the final decision on the wording.", "Export a PDF after review."],
-        },
-        {
-          id: "formpilot-tradeoff", title: "Control over one-click completion",
-          paragraphs: ["A review step makes the flow longer than a one-click rewrite. That is an intentional trade-off when a mistaken statement can follow someone into an interview.", "The design goal is to avoid fabricated experience. An explanation alone cannot guarantee that, so the applicant’s review remains essential and should be evaluated as part of the product."],
-        },
-        {
-          id: "formpilot-outcome", title: "What this prototype demonstrates",
-          paragraphs: ["The prototype explores transparent editing and PDF export. It is not evidence of better hiring outcomes or a guarantee that every generated suggestion is correct.", "Next I would test whether applicants catch unsupported edits, understand the reason for a change, and can export a readable resume without losing important details."],
-        },
-      ],
-    },
-  },
-};
-
-export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return Object.hasOwn(caseStudies, slug) ? caseStudies[slug] : undefined;
-}
-
-export const resumeSkills = [
-  { title: "Product design", detail: "Interaction design, information architecture, wireframing, prototyping, usability testing, and design systems." },
-  { title: "Design engineering", detail: "React, TypeScript, React Native, Expo, reusable components, and implementation review." },
-  { title: "Ways of working", detail: "Figma, FigJam, cross-functional collaboration, and AI-assisted implementation with human review." },
-];
-
-export const resume = {
-  summary: "My work spans AI-assisted SaaS, native mobile experiences, and design systems.",
-  achievements: [
-    "Designed goal-based onboarding that demonstrates product value before plan selection.",
-    "Designed and built Reepl’s native mobile review-and-publish workflow with React Native and Expo.",
-    "Designed relationship-management flows covering saved contacts, context, and follow-up.",
-  ],
-  education: {
-    degree: "Bachelor’s in Computer Science",
-    year: "2025",
-    school: "University of Engineering & Management, Jaipur",
   },
 };

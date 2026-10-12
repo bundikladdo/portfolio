@@ -1,114 +1,259 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCaseStudy, selectedWork, site } from "@/data/site";
+import { caseStudies, jobs, selectedWork } from "@/data/site";
+import { Button } from "@/components/Button";
 import { CheckpointNav } from "@/components/CheckpointNav";
 import { ReeplThumbnail } from "@/components/ReeplThumbnail";
 import { CustomVideoPlayer } from "@/components/CustomVideoPlayer";
 import { ExpandableCaseStudyImage } from "@/components/ExpandableCaseStudyImage";
 
+const allProjects = jobs.flatMap((job) => [
+  ...(job.featured ? [job.featured] : []),
+  ...job.projects,
+]);
+const caseStudyProjects = selectedWork.filter(
+  (work) => work.case && caseStudies[work.slug],
+);
+
 type Props = { params: Promise<{ slug: string }> };
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return selectedWork.map(({ slug }) => ({ slug }));
+export async function generateStaticParams() {
+  return Object.keys(caseStudies).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const study = getCaseStudy(slug);
-  if (!study) notFound();
-  return {
-    title: study.story.title,
-    description: study.shipped,
-    alternates: { canonical: `/work/${slug}` },
-    openGraph: { title: study.story.title, description: study.shipped, url: `/work/${slug}`, type: "article" },
-    twitter: { card: "summary_large_image", title: study.story.title, description: study.shipped },
-  };
+  const project = allProjects.find((p) => p.slug === slug);
+  const study = caseStudies[slug];
+  return { title: study?.story?.title ?? project?.title ?? "Work" };
 }
 
 export default async function WorkPage({ params }: Props) {
   const { slug } = await params;
-  const study = getCaseStudy(slug);
-  const index = selectedWork.findIndex((work) => work.slug === slug);
-  if (!study || index < 0) notFound();
-  const work = selectedWork[index];
-  const nextCase = selectedWork[(index + 1) % selectedWork.length];
-  const previousCase = selectedWork[(index - 1 + selectedWork.length) % selectedWork.length];
+  const project = allProjects.find((p) => p.slug === slug);
+  const study = caseStudies[slug];
+  if (!project || !study) notFound();
+
+  const currentCaseIndex = caseStudyProjects.findIndex((work) => work.slug === slug);
+  const previousCase =
+    currentCaseIndex >= 0
+      ? caseStudyProjects[
+          (currentCaseIndex - 1 + caseStudyProjects.length) % caseStudyProjects.length
+        ]
+      : undefined;
+  const nextCase =
+    currentCaseIndex >= 0
+      ? caseStudyProjects[(currentCaseIndex + 1) % caseStudyProjects.length]
+      : undefined;
 
   return (
-    <main id="main" className="case-study-page">
-      <CheckpointNav checkpoints={study.story.sections.map((section) => ({ id: section.id, label: section.title }))} />
+    <main id="main">
+      {study.story && (
+        <CheckpointNav
+          checkpoints={study.story.sections.map((section) => ({
+            id: section.id,
+            label: section.title,
+            preview: section.paragraphs[0] ?? section.list?.[0],
+          }))}
+        />
+      )}
       <article className="pane pane-lg">
-        <nav className="case-top-nav" aria-label="Portfolio navigation">
-          <Link href="/work" className="back-link">← All work</Link>
-          <Link href="/about">About</Link>
-          <Link href={site.resumeHref}>Resume</Link>
-        </nav>
-        <header className="case-study-header">
-          <p className="case-eyebrow">{work.discipline} · {work.year} · {work.status}</p>
-          <h1 className="t-hero case-study-title">{study.story.title}</h1>
-          <p className="case-subtitle">{study.story.subtitle}</p>
-        </header>
-        <section className="case-overview" aria-labelledby="overview-title">
-          <h2 id="overview-title" className="t-section">The project at a glance</h2>
-          <dl className="case-summary">
-            <div><dt>My role</dt><dd>{study.role}</dd></div>
-            <div><dt>Scope</dt><dd>{study.scope}</dd></div>
-            <div><dt>The problem</dt><dd>{study.problem}</dd></div>
-            <div><dt>What shipped</dt><dd>{study.shipped}</dd></div>
-            <div><dt>Outcome</dt><dd>{study.outcome}</dd></div>
-          </dl>
-          <p className="case-evidence"><strong>Evidence:</strong> {study.evidence}</p>
-        </section>
-        {work.visual === "dotted-grid" && (
-          <div className="work-card-visual case-study-visual case-hero-visual">
-            <ReeplThumbnail artwork={study.story.artwork} artworks={study.story.artworks} />
+        <div className={previousCase && nextCase ? "case-study-back" : undefined}>
+          <Link href="/" className="case-study-avatar" aria-label="Go to home">
+            <Image
+              src="/kartik.jpg"
+              alt=""
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-full object-cover"
+            />
+          </Link>
+          {previousCase && nextCase && (
+            <nav className="case-study-switcher" aria-label="Other case studies">
+              <Button
+                href={`/work/${previousCase.slug}`}
+                variant="secondary"
+                aria-label={`Previous case study: ${previousCase.line}`}
+                title={`Previous: ${previousCase.line}`}
+              >
+                <span aria-hidden="true">←</span>
+              </Button>
+              <Button
+                href={`/work/${nextCase.slug}`}
+                variant="secondary"
+                aria-label={`Next case study: ${nextCase.line}`}
+                title={`Next: ${nextCase.line}`}
+              >
+                <span aria-hidden="true">→</span>
+              </Button>
+            </nav>
+          )}
+        </div>
+        {study.story ? (
+          <>
+            <h1 className="t-hero case-study-title">{study.story.title}</h1>
+            <p className="mt-4 max-w-prose text-base text-[var(--muted)]">
+              {study.story.subtitle}
+            </p>
+            <div className="work-card-visual case-study-visual mt-8">
+              <ReeplThumbnail
+                artwork={study.story.artwork}
+                artworks={study.story.artworks}
+              />
+            </div>
+            <div className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
+              {study.story.metadata.map((item) => (
+                <div key={item.label}>
+                  <p className="text-sm font-normal normal-case tracking-normal text-[var(--muted)]">
+                    {item.label}
+                  </p>
+                  <p className="mt-1 text-base">{item.value}</p>
+                </div>
+              ))}
+            </div>
+            <div className="case-study-sections mt-14 space-y-12">
+              {study.story.sections.map((section) => (
+                <section id={section.id} key={section.id} className="scroll-mt-24">
+                  <div className="case-study-copy">
+                    <h2 className="mt-2 text-lg font-medium tracking-tight">
+                      {section.title}
+                    </h2>
+                    {section.paragraphs.length > 0 && (
+                      <div className="mt-4 space-y-4">
+                        {section.paragraphs.map((paragraph) => (
+                          <p className="t-lede text-justify" key={paragraph}>
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    {section.list && (
+                      <ul className="mt-4 list-disc space-y-2 pl-5 text-[14px] leading-relaxed text-[var(--body)]">
+                        {section.list.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {section.image && (
+                      <figure
+                        className={`case-study-image mt-6 overflow-hidden rounded-xl border border-hairline bg-[var(--surface)]${
+                          section.image.variant === "phone" ? " case-study-image--phone" : ""
+                        }`}
+                      >
+                        {section.image.variant === "phone" ? (
+                          <ExpandableCaseStudyImage
+                            src={section.image.src}
+                            alt={section.image.alt}
+                            width={section.image.width ?? 3024}
+                            height={section.image.height ?? 1652}
+                          />
+                        ) : (
+                          <Image
+                            src={section.image.src}
+                            alt={section.image.alt}
+                            width={section.image.width ?? 3024}
+                            height={section.image.height ?? 1652}
+                            className="h-auto w-full"
+                            sizes="(max-width: 768px) 100vw, 900px"
+                          />
+                        )}
+                        <figcaption className="px-4 py-3 text-sm text-[var(--muted)]">
+                          {section.image.caption}
+                        </figcaption>
+                      </figure>
+                    )}
+                  </div>
+                  {section.metrics && (
+                    <div className="case-study-impact case-study-visual mt-6">
+                      <div className="case-study-metric-grid">
+                        {section.metrics.map((metric) => (
+                          <div className="case-study-metric" key={metric.label}>
+                            <p className="case-study-metric-value">{metric.value}</p>
+                            <p className="case-study-metric-label">{metric.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {section.video && (
+                    <div className="work-card-visual case-study-visual mt-6">
+                      <CustomVideoPlayer
+                        src={section.video.src}
+                        poster={section.video.poster}
+                        ariaLabel={section.video.ariaLabel}
+                      />
+                    </div>
+                  )}
+                  {section.videoPlaceholder && (
+                    <div className="case-study-video-placeholder mt-6" role="img" aria-label={section.videoPlaceholder.label}>
+                      <span className="case-study-video-placeholder__eyebrow">{section.videoPlaceholder.label}</span>
+                      <h3>{section.videoPlaceholder.title}</h3>
+                      <p>{section.videoPlaceholder.body}</p>
+                      <span className="case-study-video-placeholder__play" aria-hidden="true">
+                        ▶
+                      </span>
+                    </div>
+                  )}
+                </section>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="mt-8 font-mono text-[0.7rem] uppercase tracking-wider text-[var(--muted)]">
+              {project.status}
+            </p>
+            <h1 className="t-hero mt-2">{project.title}</h1>
+            {project.highlight && (
+              <p className="t-lede mt-4 max-w-prose">
+                <span className="highlight">{project.highlight}</span>
+              </p>
+            )}
+          </>
+        )}
+
+        {study.image && (
+          <div className="relative mt-10 overflow-hidden rounded-[10px] border border-hairline bg-[var(--surface)]">
+            <Image
+              src={study.image}
+              alt=""
+              width={1600}
+              height={1000}
+              className="h-auto w-full object-cover object-top"
+            />
           </div>
         )}
-        <details className="case-contents">
-          <summary>In this case study · {study.story.sections.length} sections</summary>
-          <nav aria-label="Case study contents">
-            {study.story.sections.map((section) => <a key={section.id} href={`#${section.id}`}>{section.title}</a>)}
-          </nav>
-        </details>
-        <div className="case-study-sections">
-          {study.story.sections.map((section) => (
-            <section id={section.id} key={section.id} className="case-section">
-              <h2 className="t-section">{section.title}</h2>
-              {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              {section.list && <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
-              {section.image && (
-                <figure className={`case-study-image${section.image.variant === "phone" ? " case-study-image--phone" : ""}`}>
-                  <ExpandableCaseStudyImage src={section.image.src} alt={section.image.alt} width={section.image.width ?? 1600} height={section.image.height ?? 1000} sizes={section.image.variant === "phone" ? "(max-width: 390px) 90vw, 352px" : undefined} />
-                  <figcaption>{section.image.caption}</figcaption>
-                </figure>
-              )}
-              {section.metrics && (
-                <dl className="case-study-metric-grid">
-                  {section.metrics.map((metric) => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}
-                </dl>
-              )}
-              {section.video && (
-                <figure className="case-video">
-                  <div className="work-card-visual case-study-visual">
-                    <CustomVideoPlayer src={section.video.src} poster={section.video.poster} ariaLabel={section.video.ariaLabel} />
-                  </div>
-                  <figcaption>{section.video.ariaLabel}. Silent screen recording; the surrounding text describes the flow.</figcaption>
-                </figure>
-              )}
+
+        {!study.story && (
+          <div className="mt-12 max-w-prose space-y-8">
+            <section>
+              <h2 className="font-sans text-sm font-medium uppercase tracking-wider text-[var(--muted)]">
+                The problem
+              </h2>
+              <p className="t-lede mt-2">{study.problem}</p>
             </section>
-          ))}
-        </div>
-        <footer className="case-study-footer">
-          {study.url && <a href={study.url} target="_blank" rel="noopener noreferrer" className="case-product-link">Visit {work.line.split(" · ")[0]} ↗</a>}
-          <nav className="case-next-projects" aria-label="More case studies">
-            <Link href={`/work/${previousCase.slug}`}><span>← Previous study</span>{previousCase.line}</Link>
-            <Link href={`/work/${nextCase.slug}`}><span>Next study →</span>{nextCase.line}</Link>
-          </nav>
-          <a href={`mailto:${site.email}`}>Discuss this project ↗</a>
-        </footer>
+            <section>
+              <h2 className="font-sans text-sm font-medium uppercase tracking-wider text-[var(--muted)]">
+                What shipped
+              </h2>
+              <p className="t-lede mt-2">{study.shipped}</p>
+            </section>
+            <section>
+              <h2 className="font-sans text-sm font-medium uppercase tracking-wider text-[var(--muted)]">
+                Outcome
+              </h2>
+              <p className="t-lede mt-2">{study.outcome}</p>
+            </section>
+          </div>
+        )}
+
+        {study.url && !study.story && (
+          <Button href={study.url} variant="primary" className="mt-10" target="_blank" rel="noreferrer">
+            Open {project.title} ↗
+          </Button>
+        )}
       </article>
     </main>
   );

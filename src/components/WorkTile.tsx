@@ -3,33 +3,46 @@ import Link from "next/link";
 import type { WorkCard } from "@/data/site";
 import { ReeplThumbnail } from "@/components/ReeplThumbnail";
 
-export function WorkTile({ work, eager = false }: { work: WorkCard; eager?: boolean }) {
-  return (
-    <Link href={`/work/${work.slug}`} className="work-card">
+export function WorkTile({ work }: { work: WorkCard }) {
+  const inner = (
+    <>
       <div className="work-card-visual">
         {work.visual === "dotted-grid" ? (
-          <ReeplThumbnail artwork={work.artwork} artworks={work.artworks} eager={eager} />
-        ) : work.image ? (
-          <div className="work-card-image-frame">
-            <Image src={work.image} alt="" width={800} height={500} sizes="(max-width: 720px) calc(100vw - 40px), 600px" loading={eager ? "eager" : "lazy"} />
-          </div>
+          <ReeplThumbnail artwork={work.artwork} artworks={work.artworks} />
         ) : (
-          <div className="work-card-concept" aria-hidden="true">
-            <span>FormPilot</span>
-            <div className="concept-change"><span>Original experience</span><span>Suggested edit + reason</span><span>Your review → PDF</span></div>
-            <small>Review workflow · Concept diagram</small>
+          <div className="work-card-image-frame">
+            <Image
+              src={work.image ?? "/work/first.jpg"}
+              alt=""
+              width={640}
+              height={400}
+              quality={100}
+              className={
+                work.image === "/backgrounds/pixel-blast.png"
+                  ? "pixel-art-image"
+                  : undefined
+              }
+            />
           </div>
         )}
       </div>
       <div className="work-card-meta">
         <div className="work-card-heading">
-          <h3 className="work-card-line">{work.line}</h3>
+          <p className="work-card-line">{work.line}</p>
           <span className="work-card-year">{work.year}</span>
         </div>
         <p className="work-card-about">{work.about}</p>
-        <p className="work-card-discipline">{work.discipline} <span>· {work.status}</span></p>
-        <span className="work-card-cta">Read case study <span aria-hidden="true">↗</span></span>
       </div>
-    </Link>
+    </>
   );
+
+  if (work.case) {
+    return (
+      <Link href={`/work/${work.slug}`} className="work-card">
+        {inner}
+      </Link>
+    );
+  }
+
+  return <div className="work-card">{inner}</div>;
 }

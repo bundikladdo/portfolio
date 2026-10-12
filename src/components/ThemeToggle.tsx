@@ -1,24 +1,13 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-
-const themeChangeEvent = "portfolio-theme-change";
-
-function subscribe(onChange: () => void) {
-  window.addEventListener(themeChangeEvent, onChange);
-  return () => window.removeEventListener(themeChangeEvent, onChange);
-}
-
-function getSnapshot(): "light" | "dark" {
-  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-}
-
-function getServerSnapshot(): "light" {
-  return "light";
-}
+import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -27,7 +16,7 @@ export function ThemeToggle() {
     try {
       localStorage.setItem("portfolio-theme", nextTheme);
     } catch {}
-    window.dispatchEvent(new Event(themeChangeEvent));
+    setTheme(nextTheme);
   };
 
   return (
