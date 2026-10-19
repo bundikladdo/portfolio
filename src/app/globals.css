@@ -1543,22 +1543,12 @@ p {
 }
 
 @media (max-width: 639px) {
-  .work-card-dotted-grid {
-    padding: 1rem;
-  }
-
   .work-card-visual img.work-card-thumbnail-art {
-    height: 100%;
-    transform: none;
+    transform: translate(6.85%, 11%) scale(1.1);
   }
 
   .work-card-dotted-grid--phone img.work-card-thumbnail-art {
     transform: translateX(-50%);
-  }
-
-  .work-card-visual img.work-card-phone-shot {
-    bottom: 5%;
-    height: 90%;
   }
 
   .work-card-heading {
