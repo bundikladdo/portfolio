@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { caseStudies, jobs, selectedWork } from "@/data/site";
+import { caseStudies, jobs, selectedWork, sideProjects } from "@/data/site";
 import { Button } from "@/components/Button";
 import { CheckpointNav } from "@/components/CheckpointNav";
 import { ReeplThumbnail } from "@/components/ReeplThumbnail";
 import { CustomVideoPlayer } from "@/components/CustomVideoPlayer";
 import { ExpandableCaseStudyImage } from "@/components/ExpandableCaseStudyImage";
+import { ViewCopy } from "@/components/ViewCopy";
 
-const allProjects = jobs.flatMap((job) => [
-  ...(job.featured ? [job.featured] : []),
-  ...job.projects,
-]);
+const allProjects = [
+  ...jobs.flatMap((job) => [...(job.featured ? [job.featured] : []), ...job.projects]),
+  ...sideProjects,
+];
 const caseStudyProjects = selectedWork.filter(
   (work) => work.case && caseStudies[work.slug],
 );
@@ -54,6 +55,7 @@ export default async function WorkPage({ params }: Props) {
         <CheckpointNav
           checkpoints={study.story.sections.map((section) => ({
             id: section.id,
+            view: section.view,
             label: section.title,
             preview: section.paragraphs[0] ?? section.list?.[0],
           }))}
@@ -95,7 +97,7 @@ export default async function WorkPage({ params }: Props) {
           <>
             <h1 className="t-hero case-study-title">{study.story.title}</h1>
             <p className="mt-4 max-w-prose text-base text-[var(--muted)]">
-              {study.story.subtitle}
+              <ViewCopy text={study.story.subtitle} />
             </p>
             <div className="work-card-visual case-study-visual mt-8">
               <ReeplThumbnail
@@ -105,7 +107,7 @@ export default async function WorkPage({ params }: Props) {
             </div>
             <div className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
               {study.story.metadata.map((item) => (
-                <div key={item.label}>
+                <div key={`${item.label}-${item.view ?? "all"}`} data-view-only={item.view}>
                   <p className="text-sm font-normal normal-case tracking-normal text-[var(--muted)]">
                     {item.label}
                   </p>
@@ -115,7 +117,12 @@ export default async function WorkPage({ params }: Props) {
             </div>
             <div className="case-study-sections mt-14 space-y-12">
               {study.story.sections.map((section) => (
-                <section id={section.id} key={section.id} className="scroll-mt-24">
+                <section
+                  id={section.id}
+                  key={section.id}
+                  className="scroll-mt-24"
+                  data-view-only={section.view}
+                >
                   <div className="case-study-copy">
                     <h2 className="mt-2 text-lg font-medium tracking-tight">
                       {section.title}
@@ -240,7 +247,9 @@ export default async function WorkPage({ params }: Props) {
               <h2 className="font-sans text-sm font-medium uppercase tracking-wider text-[var(--muted)]">
                 What shipped
               </h2>
-              <p className="t-lede mt-2">{study.shipped}</p>
+              <p className="t-lede mt-2">
+                <ViewCopy text={study.shipped} />
+              </p>
             </section>
             <section>
               <h2 className="font-sans text-sm font-medium uppercase tracking-wider text-[var(--muted)]">

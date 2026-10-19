@@ -28,18 +28,33 @@ export default function Home() {
           </Link>
           <h1 className="hero-name">{site.name}</h1>
           <p className="t-lede">
-            Product Designer at <AutodeusChip />, building 0→1 products remotely.
+            Product designer at <AutodeusChip />, working on{" "}
+            <BrandChip brand={brands.reepl} />, an AI tool for writing LinkedIn posts.
           </p>
         </div>
         <div className="hero-copy">
-          <p className="t-lede">
-            Previously, I built <BrandChip brand={brands.garga} href="#work" />, an
-            astrology product.
+          <p className="t-lede" data-view-only="design">
+            I redesigned Reepl’s onboarding so new users see the product working
+            before they choose a plan, and designed its iOS and Android app around
+            a daily review habit.
+          </p>
+          <p className="t-lede" data-view-only="design">
+            I also built the team’s Figma design system, and use usability tests
+            and interviews to find where workflows break.
+          </p>
+          <p className="t-lede" data-view-only="code">
+            I designed Reepl’s iOS and Android app and implemented it with AI
+            assistance in 17 days, using Claude Code, Expo, React Native, and
+            TypeScript.
+          </p>
+          <p className="t-lede" data-view-only="code">
+            I also code reusable UI components and coordinate handoffs with the
+            team’s engineers.
           </p>
           <p className="t-lede">
             I’ve worked with teams at Tutedude, RoomsVital, and Iceberg Ice Creams.
           </p>
-          <p className="t-lede">Based in Jaipur, Rajasthan.</p>
+          <p className="t-lede">Based in Jaipur, Rajasthan, working remotely.</p>
         </div>
 
         <HeroActions />
@@ -67,7 +82,7 @@ export default function Home() {
 
       <footer id="contact" className="pane text-sm text-[var(--body)]">
         <div className="footer-row">
-          <p>Last updated <time dateTime="2026-09-27">September 27, 2026</time></p>
+          <p>Last updated <time dateTime="2026-10-19">October 19, 2026</time></p>
           <ThemeToggle />
         </div>
       </footer>

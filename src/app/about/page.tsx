@@ -61,14 +61,30 @@ export default function AboutPage() {
       <header className="about-intro">
         <h1>About me</h1>
         <div className="about-copy">
-          <p>
-            I’m a product designer at Autodeus Technologies, building 0→1
-            products remotely. I work with early-stage teams to turn complex
-            ideas into clear, useful digital experiences.
+          <p data-view-only="design">
+            I’m a product designer at Autodeus Technologies, working remotely on
+            Reepl, an AI tool for writing LinkedIn posts. I’ve designed its
+            onboarding, contact management, and iOS and Android app, and built
+            the team’s Figma design system.
+          </p>
+          <p data-view-only="design">
+            I like taking fuzzy things, like AI output, and designing them into
+            flows people can understand and check.
+          </p>
+          <p data-view-only="code">
+            I’m a product designer at Autodeus Technologies, working remotely on
+            Reepl. I design in Figma and take my work into code: I implemented
+            Reepl’s iOS and Android app with Claude Code, Expo, React Native, and
+            TypeScript, and I code reusable UI components with the team’s
+            engineers.
+          </p>
+          <p data-view-only="code">
+            AI writes much of the implementation. The product and interaction
+            decisions, and the review of what gets built, stay with me.
           </p>
           <p>
-            Previously, I built Garga, an astrology product. I’ve also worked
-            with teams at Tutedude, RoomsVital, and Iceberg Ice Creams.
+            I’ve also worked with teams at Tutedude, RoomsVital, and Iceberg Ice
+            Creams.
           </p>
           <p>Based in {site.location}.</p>
         </div>

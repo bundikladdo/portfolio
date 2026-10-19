@@ -1869,12 +1869,106 @@ p {
   color: var(--ink);
 }
 
+/* Design / Code view. html[data-view] is set before paint by the view-init script in layout.tsx. */
+:root[data-view="code"] [data-view-only="design"],
+:root:not([data-view="code"]) [data-view-only="code"] {
+  display: none;
+}
+
+.view-switch {
+  position: fixed;
+  z-index: 50;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  left: 50%;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--card-raised);
+  box-shadow:
+    0 1px 2px var(--shadow-card),
+    0 8px 24px var(--shadow-popover);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 200ms ease;
+}
+
+.view-switch[data-ready] {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Only offer the switch on pages where the two views differ. */
+body:has([data-view-only]) .view-switch {
+  display: grid;
+}
+
+body:has([data-view-only]) .frame {
+  padding-bottom: 4.5rem;
+}
+
+.view-switch::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+.view-switch[data-ready]::before {
+  transition: transform 260ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+:root[data-view="code"] .view-switch::before {
+  transform: translateX(100%);
+}
+
+.view-switch button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2rem;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.view-switch button:hover {
+  color: var(--ink);
+}
+
+:root:not([data-view="code"]) .view-switch [data-view-option="design"],
+:root[data-view="code"] .view-switch [data-view-option="code"] {
+  color: var(--canvas);
+}
+
+.view-switch button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .brand-tip-card {
+  .brand-tip-card,
+  .view-switch,
+  .view-switch[data-ready]::before,
+  .view-switch button {
     transition: none;
   }
 }

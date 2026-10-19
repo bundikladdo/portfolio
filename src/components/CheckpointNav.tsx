@@ -2,8 +2,10 @@
 
 import ScrollSpy from "react-scrollspy-navigation";
 import { useState } from "react";
+import { useView } from "@/components/ViewSwitch";
+import type { View } from "@/data/site";
 
-type Checkpoint = { id: string; label: string; preview?: string };
+type Checkpoint = { id: string; label: string; preview?: string; view?: View };
 
 export function CheckpointNav({
   checkpoints,
@@ -11,6 +13,13 @@ export function CheckpointNav({
   checkpoints: Checkpoint[];
 }) {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const view = useView();
+
+  // Every checkpoint stays mounted for ScrollSpy; hidden ones are skipped when measuring distance.
+  let visibleCount = 0;
+  const visibleIndexes = checkpoints.map((checkpoint) =>
+    !checkpoint.view || checkpoint.view === view ? visibleCount++ : -1,
+  );
 
   return (
     <ScrollSpy
@@ -24,17 +33,20 @@ export function CheckpointNav({
         aria-label="Case study sections"
         onPointerLeave={() => setFocusedIndex(null)}
       >
-        {checkpoints.map(({ id, label, preview }, index) => (
+        {checkpoints.map(({ id, label, preview, view: checkpointView }, index) => (
           <a
             key={id}
             href={`#${id}`}
             className="checkpoint-link"
             aria-label={label}
+            data-view-only={checkpointView}
             data-distance={
-              focusedIndex === null ? undefined : Math.abs(index - focusedIndex)
+              focusedIndex === null
+                ? undefined
+                : Math.abs(visibleIndexes[index] - focusedIndex)
             }
-            onPointerEnter={() => setFocusedIndex(index)}
-            onFocus={() => setFocusedIndex(index)}
+            onPointerEnter={() => setFocusedIndex(visibleIndexes[index])}
+            onFocus={() => setFocusedIndex(visibleIndexes[index])}
             onBlur={() => setFocusedIndex(null)}
           >
             <span className="checkpoint-label" aria-hidden="true">

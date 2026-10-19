@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { WorkCard } from "@/data/site";
 import { ReeplThumbnail } from "@/components/ReeplThumbnail";
+import { ViewCopy } from "@/components/ViewCopy";
 
 export function WorkTile({ work }: { work: WorkCard }) {
   const inner = (
@@ -31,7 +32,9 @@ export function WorkTile({ work }: { work: WorkCard }) {
           <p className="work-card-line">{work.line}</p>
           <span className="work-card-year">{work.year}</span>
         </div>
-        <p className="work-card-about">{work.about}</p>
+        <p className="work-card-about">
+          <ViewCopy text={work.about} />
+        </p>
       </div>
     </>
   );

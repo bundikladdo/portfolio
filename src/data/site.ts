@@ -2,7 +2,7 @@ export const site = {
   name: "Kartik Jangid",
   role: "Product designer who ships",
   location: "Jaipur, Rajasthan",
-  email: "support@garga.app",
+  email: "jangidkartik002@gmail.com",
   headline: [
     "Product Designer working with",
     "early-stage startups to build 0→1 products.",
@@ -65,8 +65,13 @@ export type Brand = {
 export const brands = {
   autodeus: { name: "Autodeus Technologies", color: "#26251e" },
   reepl: { name: "Reepl", href: "https://reepl.io", color: "#26251e" },
-  garga: { name: "Garga", href: "https://garga.app", color: "#f54e00" },
 } as const;
+
+/** The site has a Design view (default) and a Code view for design-engineering roles. */
+export type View = "design" | "code";
+
+/** Copy that reads differently in the Design and Code views. */
+export type ViewText = string | Record<View, string>;
 
 export const autodeusProducts = [
   { name: "Smartify", href: "https://smartify.in", image: "/products/smartify.png" },
@@ -88,7 +93,7 @@ export type Project = {
 export type WorkCard = {
   slug: string;
   line: string;
-  about: string;
+  about: ViewText;
   year: string;
   image?: string;
   visual?: "dotted-grid";
@@ -100,8 +105,11 @@ export type WorkCard = {
 export const selectedWork: WorkCard[] = [
   {
     slug: "reepl-mobile",
-    line: "Reepl Mobile: Build the daily loop in 17 days",
-    about: "AI-first design & development",
+    line: "Reepl Mobile: Designing the daily review loop",
+    about: {
+      design: "Mobile product design · iOS and Android",
+      code: "Designed and implemented in 17 days · Expo, React Native",
+    },
     year: "2026",
     visual: "dotted-grid",
     artwork: {
@@ -119,7 +127,7 @@ export const selectedWork: WorkCard[] = [
   {
     slug: "reepl-onboarding",
     line: "Reepl Onboarding: Show the Product Before Asking for the Commitment",
-    about: "AI First Design & Development",
+    about: "SaaS onboarding · Product design",
     year: "2026",
     visual: "dotted-grid",
     case: true,
@@ -127,7 +135,7 @@ export const selectedWork: WorkCard[] = [
   {
     slug: "reepl-contacts",
     line: "Reepl Contacts: CRM from the Ground Up",
-    about: "CRM Design & Product Strategy",
+    about: "CRM design · Product strategy",
     year: "2026",
     visual: "dotted-grid",
     artwork: {
@@ -139,25 +147,12 @@ export const selectedWork: WorkCard[] = [
   },
   {
     slug: "garga",
-    line: "Swiss Ephemeris under the chat — not vibes",
-    about: "Building, designing and coding",
+    line: "An astrology app that gives the same answer twice",
+    about: {
+      design: "Side project · Product design",
+      code: "Side project · Product design & AI-assisted building",
+    },
     year: "2025",
-    image: "/backgrounds/pixel-blast.png",
-    case: true,
-  },
-  {
-    slug: "toolnest",
-    line: "Seven tools. No signup.",
-    about: "Building, designing and coding",
-    year: "2026",
-    image: "/backgrounds/pixel-blast.png",
-    case: true,
-  },
-  {
-    slug: "vizzly",
-    line: "Every AI change explained",
-    about: "Product design research",
-    year: "2026",
     image: "/backgrounds/pixel-blast.png",
     case: true,
   },
@@ -171,7 +166,9 @@ export const selectedWork: WorkCard[] = [
 ];
 
 export const featuredWork: WorkCard[] = [
-  ...selectedWork.slice(0, 3),
+  selectedWork[1], // Lead with the live onboarding case study.
+  selectedWork[0], // Show native interactions and AI-assisted implementation next.
+  selectedWork[2],
 ];
 
 export type Job = {
@@ -190,7 +187,7 @@ export type Job = {
 export const jobs: Job[] = [
   {
     id: "smartify",
-    company: "Smartify",
+    company: "Autodeus Technologies",
     color: "#26251e",
     period: "Dec 2024 — Present",
     origin: "Ahmedabad",
@@ -201,7 +198,7 @@ export const jobs: Job[] = [
       status: "live",
       highlight: "Claude → drafts, you still hit publish",
       description:
-        "Solo designer in a 2-person team. AI LinkedIn SaaS: 24+ routes, 7 languages, 10,000+ users.",
+        "Product design for Reepl, an AI LinkedIn SaaS: onboarding, contact management, a Figma design system, and the iOS and Android app.",
       href: "https://reepl.io",
       case: true,
     },
@@ -253,8 +250,22 @@ export const jobs: Job[] = [
   },
 ];
 
+// Work outside a job that still has a detail page.
+export const sideProjects: Project[] = [
+  {
+    slug: "garga",
+    title: "Garga",
+    status: "live",
+    description: "An astrology side project where chart calculations come before AI narration.",
+    href: "https://garga.app",
+    case: true,
+  },
+];
+
 type CaseStudySection = {
   id: string;
+  /** Show this section in one view only; omit to show it in both. */
+  view?: View;
   title: string;
   paragraphs: string[];
   list?: string[];
@@ -273,14 +284,14 @@ type CaseStudySection = {
 
 type CaseStudy = {
   problem: string;
-  shipped: string;
+  shipped: ViewText;
   outcome: string;
   image?: string;
   url?: string;
   story?: {
     title: string;
-    subtitle: string;
-    metadata: { label: string; value: string }[];
+    subtitle: ViewText;
+    metadata: { label: string; value: string; view?: View }[];
     artwork?: { src: string; width: number; height: number };
     artworks?: { src: string; width: number; height: number }[];
     sections: CaseStudySection[];
@@ -298,12 +309,18 @@ export const caseStudies: Record<string, CaseStudy> = {
     url: "https://reepl.io",
     story: {
       title: "Reepl Mobile: the daily publishing loop",
-      subtitle:
-        "I designed and built Reepl’s native iOS and Android app in 17 days. The app is built but not yet in production; this case study covers the design and implementation, with impact still to be measured.",
+      subtitle: {
+        design:
+          "I designed Reepl’s native iOS and Android app around one daily job: review Andy’s draft, give feedback, and publish. The app is built but not yet in production, so this case study covers the design decisions; impact is still to be measured.",
+        code:
+          "I designed Reepl’s native iOS and Android app and implemented it with AI assistance in 17 days. The app is built but not yet in production; this case study covers the design and implementation, with impact still to be measured.",
+      },
       metadata: [
-        { label: "Role", value: "Sole designer and engineer" },
+        { label: "Role", value: "Product designer", view: "design" },
+        { label: "Role", value: "Product designer · AI-assisted implementation", view: "code" },
         { label: "Timeline", value: "14 Sep – 1 Oct 2026" },
-        { label: "Stack", value: "Expo, React Native, TypeScript, Claude Code" },
+        { label: "Platforms", value: "iOS and Android", view: "design" },
+        { label: "Stack", value: "Expo, React Native, TypeScript, Claude Code", view: "code" },
         { label: "Status", value: "Built · Not yet in production" },
       ],
       artwork: {
@@ -390,9 +407,10 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
         {
           id: "mobile-engineering",
-          title: "Engineering that protected the design",
+          view: "code",
+          title: "Implementation details that protected the design",
           paragraphs: [
-            "The fastest route was not just shipping screens. I fixed the rough edges that would have made a small app feel unreliable on its most important path.",
+            "During AI-assisted implementation, I reviewed the core flow and worked through issues that affected sign-in, loading, and review. These details mattered because users need a reliable path from opening the app to publishing.",
           ],
           list: [
             "Fixed Google sign-in failing on the first tap and Home loading as a cascade of spinners during development.",
@@ -402,16 +420,17 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
         {
           id: "mobile-ai-workflow",
+          view: "code",
           title: "AI in the workflow",
           paragraphs: [
-            "Claude Code handled repetitive refactors and first-draft Android ports. I made the design calls, reviewed the implementation, and checked changes on the simulator. I have not measured the time saved by this workflow.",
+            "I used Claude Code for the implementation, including refactors and the Android port. I made the product and interaction decisions, reviewed the output, and checked changes on the simulator. I haven’t measured how much time this saved.",
           ],
         },
         {
           id: "mobile-outcome",
           title: "Current state",
           paragraphs: [
-            "The app is built but has not gone into production. The screens show the implemented experience, including sample streak data. There are no production results to report yet.",
+            "The app is built but has not gone into production. The screens show the built app with sample streak data, so there are no user results to report yet.",
           ],
           image: {
             src: "/work/reepl-mobile/streak.png",
@@ -442,7 +461,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       subtitle: "Reepl asked users to start a paid trial before they had seen the product work. I redesigned onboarding around each user’s stated goal and added a personalized Andy demo before plan selection.",
       metadata: [
         { label: "Duration", value: "2 weeks" },
-        { label: "Role", value: "Product Designer (flow design and product build alongside engineering)" },
+        { label: "Role", value: "Product designer · User flows, prototypes, and implementation review with engineering" },
         { label: "Users", value: "Every new Reepl signup" },
         { label: "Status", value: "Live" },
       ],
@@ -564,7 +583,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       subtitle:
         "We designed a lightweight CRM for LinkedIn relationship management, connecting content, engagement, conversations, and follow-up.",
       metadata: [
-        { label: "Role", value: "Product Designer (0→1 product design)" },
+        { label: "Role", value: "Product designer (0→1 product design)" },
         { label: "Users", value: "People building and managing lead lists" },
         { label: "Scope", value: "CRM, contact organization, and integrations" },
         { label: "Status", value: "Shipped" },
@@ -634,23 +653,15 @@ export const caseStudies: Record<string, CaseStudy> = {
   garga: {
     problem:
       "Most AI astrology apps hallucinate. Ask twice, get two lives. People who care about the tradition deserve the chart to be real.",
-    shipped:
-      "Swiss Ephemeris + a logic engine, then AI narration attached to the math. Reports and chat, paid.",
+    shipped: {
+      design:
+        "Reports and chat where every AI answer comes from the user’s calculated birth chart, so asking twice gets the same answer. Paid.",
+      code:
+        "Swiss Ephemeris + a logic engine, then AI narration attached to the math. Reports and chat, paid.",
+    },
     outcome:
-      "Live on garga.app. I am a designer who respects the source — not a pandit.",
+      "A side project, live on garga.app. I’m a designer who respects the source — not a pandit.",
     image: "/garga.png",
     url: "https://garga.app",
-  },
-  toolnest: {
-    problem: "Utility sites are ad farms or SaaS landings.",
-    shipped: "A small, opinionated set of micro-tools. Local where possible.",
-    outcome: "Seven tools. No signup. That’s it.",
-    image: "/toolnest.png",
-  },
-  vizzly: {
-    problem: "Resume tailoring with AI usually rewrites you into a stranger.",
-    shipped: "A review loop: every change explained, nothing fabricated, export a PDF.",
-    outcome: "Public as FormPilot. Open source.",
-    url: "https://formpilot-web-peach.vercel.app",
   },
 };
