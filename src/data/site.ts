@@ -112,7 +112,7 @@ export const selectedWork: WorkCard[] = [
     about: "Product redesign · 0 → ₹1 lakh+ MRR",
     year: "2025–26",
     visual: "dotted-grid",
-    artwork: { src: "/work/reepl-platform/composer-thumbnail.png", width: 1110, height: 780 },
+    artwork: { src: "/work/reepl-platform/composer-app.webp", width: 2000, height: 1133 },
     case: true,
   },
   {
@@ -680,7 +680,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         { label: "Timeline", value: "2025 – present" },
         { label: "Status", value: "Live" },
       ],
-      artwork: { src: "/work/reepl-platform/composer-thumbnail.png", width: 1110, height: 780 },
+      artwork: { src: "/work/reepl-platform/composer-app.webp", width: 2000, height: 1133 },
       sections: [
         {
           id: "platform-start",
