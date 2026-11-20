@@ -766,11 +766,16 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
         {
           id: "platform-context",
-          title: "Andy knows where you are",
+          title: "Andy knows you, not just the prompt",
           paragraphs: [
-            "Most AI assistants start every chat from zero, so people waste the first message explaining what they are looking at. I designed Andy to pick up that context on its own.",
-            "A small chip above the input shows what Andy can see: “Viewing: Dashboard”, “Viewing: Calendar”, or “From Composer” with the post being edited. Asking “make this shorter” just works, because Andy already knows what “this” is.",
-            "The chip can be removed with one click, so people stay in control of what the AI reads. The same conversation follows the user from page to page instead of resetting.",
+            "Generic AI writing sounds generic because it knows nothing about the person. Most assistants start every chat from zero, so people spend their first messages explaining who they are, what they sell and what they are looking at. I designed Andy around context instead, so it starts every draft already knowing the user.",
+          ],
+          list: [
+            "How you write: writing styles trained on the user’s own posts, so drafts match their tone, structure and vocabulary.",
+            "How you think and what you sell: a context profile covering the company, ideal customer, content pillars and goals, so posts point at buyers, not likes.",
+            "What you have shipped and said: integrations with GitHub, Notion, Google Docs, call-note tools like Fathom and Fireflies, Medium, Substack and YouTube feed real work and real customer questions into ideas and drafts.",
+            "Where you are: a small chip above the input shows what Andy can see, such as “Viewing: Calendar” or “From Composer” with the post being edited, so “make this shorter” just works. One click removes it.",
+            "Where you work: the same Andy runs inside Claude and ChatGPT through connectors, and the conversation follows the user from page to page instead of resetting.",
           ],
         },
         {
