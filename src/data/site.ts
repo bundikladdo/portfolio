@@ -107,6 +107,15 @@ export type WorkCard = {
 
 export const selectedWork: WorkCard[] = [
   {
+    slug: "reepl-platform",
+    line: "Reepl: From LinkedIn extension to multi-platform product",
+    about: "Product redesign · 0 → ₹1 lakh+ MRR",
+    year: "2025–26",
+    visual: "dotted-grid",
+    artwork: { src: "/work/reepl-platform/composer-thumbnail.png", width: 1110, height: 780 },
+    case: true,
+  },
+  {
     slug: "reepl-mobile",
     line: "Reepl Mobile: Designing the daily review loop",
     about: {
@@ -162,9 +171,9 @@ export const selectedWork: WorkCard[] = [
 ];
 
 export const featuredWork: WorkCard[] = [
-  selectedWork[1], // Lead with the live onboarding case study.
-  selectedWork[0], // Show native interactions and AI-assisted implementation next.
-  selectedWork[2],
+  selectedWork[0], // Lead with the platform redesign and its revenue result.
+  selectedWork[2], // Then the live onboarding case study.
+  selectedWork[1], // Then native interactions and AI-assisted implementation.
 ];
 
 export type Job = {
@@ -199,6 +208,13 @@ export const jobs: Job[] = [
       case: true,
     },
     projects: [
+      {
+        slug: "reepl-platform",
+        title: "Reepl platform",
+        status: "live",
+        description:
+          "Redesigned Reepl from a LinkedIn commenting extension into a multi-platform social media product.",
+      },
       {
         slug: "reepl-mcp",
         title: "MCP connectors",
@@ -641,6 +657,154 @@ export const caseStudies: Record<string, CaseStudy> = {
           paragraphs: [
             "The CRM connects the different parts of Reepl into one workflow: content → engagement → relationship → conversation → opportunity.",
             "A contact saved during research or outreach can become an organized, contextualized lead and then move into Zoho, HubSpot, or the team’s existing system without the same manual re-entry. Reepl becomes the relationship layer that makes the next action clear.",
+          ],
+        },
+      ],
+    },
+  },
+  "reepl-platform": {
+    problem:
+      "Reepl was a Chrome extension for writing LinkedIn comments with AI. Reviews called it hard to navigate and slow, and a commenting tool had little room to grow.",
+    shipped:
+      "A redesigned product for planning, writing, publishing and replying on LinkedIn, X and Reddit, across web, extension, phone, desktop and AI connectors.",
+    outcome:
+      "Live. Reepl has grown from zero to more than ₹1 lakh in monthly recurring revenue.",
+    url: "https://reepl.io",
+    story: {
+      title: "Reepl: From a LinkedIn commenting tool to a multi-platform product",
+      subtitle:
+        "Reepl started as a Chrome extension that wrote LinkedIn comments. I redesigned it into a product for planning, writing, publishing and replying across LinkedIn, X and Reddit. It has grown from zero to more than ₹1 lakh in monthly recurring revenue, and I now run its product and marketing alongside design.",
+      metadata: [
+        { label: "Role", value: "Product designer · Product and marketing" },
+        { label: "Team", value: "One designer, one developer" },
+        { label: "Timeline", value: "2025 – present" },
+        { label: "Status", value: "Live" },
+      ],
+      artwork: { src: "/work/reepl-platform/composer-thumbnail.png", width: 1110, height: 780 },
+      sections: [
+        {
+          id: "platform-start",
+          title: "Where Reepl started",
+          paragraphs: [
+            "Reepl launched as a commenting tool: fast AI replies on LinkedIn, and nothing else. Chrome Web Store reviews said it was hard to find things and slow to use. There was no design system, no clear hierarchy and no onboarding.",
+          ],
+        },
+        {
+          id: "platform-bet",
+          title: "The bet",
+          paragraphs: [
+            "LinkedIn was turning into a content platform, and only a small share of its members post regularly. Anyone who could post consistently had a real advantage, but consistency was exactly where professionals failed.",
+            "Staying a commenting tool meant staying small. We rebuilt Reepl around the four reasons people stopped posting.",
+          ],
+        },
+        {
+          id: "platform-problems",
+          title: "Four problems, four answers",
+          paragraphs: [],
+          list: [
+            "“I don’t know what to post.” Signals surfaces what is trending in the user’s field from Reddit, YouTube and LinkedIn. The Idea Feed prepares post ideas from their goals and past posts, so ideas are waiting when they open Reepl.",
+            "“AI sounds like a robot.” Voice profiles learn from the user’s own posts, so drafts match their tone and vocabulary. Agencies get one profile per client.",
+            "“I’m never at my desk.” Andy, Reepl’s AI agent, drafts in the background and sends posts to the user’s phone for approval. Connectors let people work from Claude or ChatGPT.",
+            "“I don’t know if it’s working.” Insights shows reach, engagement and what formats work, and users can simply ask Andy what is working for them.",
+          ],
+          image: {
+            src: "/work/reepl-platform/signals.png",
+            alt: "Reepl Signals feed showing trending topics from Reddit, Google Trends and RSS, with the new navigation on the left",
+            caption: "Signals: post ideas from Reddit, Google Trends and RSS, inside the new navigation.",
+            width: 1024,
+            height: 768,
+          },
+        },
+        {
+          id: "platform-ia",
+          title: "Restructuring the product",
+          paragraphs: [
+            "Features sat four or five clicks deep with no easy way back. I rebuilt navigation around a workspace model people already know from Slack and Notion: Dashboard, Content Hub, Analytics, Library, Contacts and Settings.",
+          ],
+          list: [
+            "The dashboard shows recently viewed items, so the trip people made most often became one click.",
+            "Analytics moved out of Settings to the top level, because the people who pay check their growth daily.",
+            "Writing, the calendar and ideas live together in the Content Hub, because people think of writing and scheduling as one job.",
+            "Settings split into three levels: personal, workspace and billing, and AI (models, voice profiles and connectors).",
+            "A command palette and search give frequent users a faster way around.",
+          ],
+        },
+        {
+          id: "platform-composer",
+          title: "The hardest decision: the composer",
+          paragraphs: [
+            "The composer, where people write, get AI help and schedule, was the most argued-over screen. The founder wanted every feature visible at all times, because more visible felt more valuable.",
+            "I argued the opposite: a screen that tries to do everything communicates nothing. I pushed for three panels with one job each: posts on the left, the editor with a LinkedIn-style preview in the centre, and the AI sidebar on the right, present but not competing.",
+            "We disagreed genuinely, and the final layout is a middle ground that is better than either starting position. The same thing happened with Stories, a feature that turns real experiences into posts. The founder wanted a pop-up; I prototyped both versions, and the sidebar version shipped.",
+          ],
+          image: {
+            src: "/work/reepl-platform/composer-thumbnail.png",
+            alt: "Reepl composer: posts list on the left, editor with a LinkedIn-style preview in the centre, AI sidebar on the right",
+            caption: "The composer: posts, editor with preview, and the AI sidebar, each with one job.",
+            width: 1110,
+            height: 780,
+          },
+        },
+        {
+          id: "platform-ai",
+          title: "One assistant, two modes",
+          paragraphs: [
+            "People needed quick help sometimes and hands-off help at other times, so the AI sidebar has two clearly separated modes.",
+          ],
+          list: [
+            "Chat mode handles one-off requests, such as building a month’s calendar from a Google Doc, using sources like Notion, Google Docs and Airtable.",
+            "Agent mode is for people who travel: connect sources, set a posting rhythm, pick a voice profile and choose where approvals go. Andy drafts batches and the user approves them from their phone.",
+            "A mode switch sits at the top, the connected sources and account are always visible, and permissions are opt-in and explained.",
+          ],
+          image: {
+            src: "/work/reepl-platform/writing-styles.png",
+            alt: "Andy's draft in the sidebar with the writing style menu open, listing voice profiles",
+            caption: "Choosing a writing style: each voice profile is one click away while drafting.",
+            width: 1024,
+            height: 768,
+          },
+        },
+        {
+          id: "platform-extension",
+          title: "Redesigning the extension",
+          paragraphs: [
+            "Users said generated comments felt robotic. The new comment tool has two paths. Quick mode offers comment types such as Appreciate, Agree and Celebrate, a length setting and one-click insert. Personalised mode lets people type or speak their own view, and the AI combines it with the post.",
+            "When someone has already started typing, the button offers to improve their text instead of replacing it.",
+          ],
+        },
+        {
+          id: "platform-system",
+          title: "A design system both of us could build from",
+          paragraphs: [
+            "With one designer and one developer there was no room for handoff mistakes. I built a design system whose tokens map directly to Tailwind, and the extension and web app now share it, so they finally feel like one product.",
+            "I designed in Figma and implemented with Claude Code, so design decisions and shipping decisions became the same decision.",
+          ],
+        },
+        {
+          id: "platform-now",
+          title: "Where Reepl is now",
+          paragraphs: [
+            "Reepl now covers LinkedIn, X and Reddit, and runs on the web, as a Chrome and Edge extension, on Android, on Mac and Windows, and inside Claude and ChatGPT. It has grown from zero to more than ₹1 lakh in monthly recurring revenue, and I run product and marketing alongside design.",
+            "The revenue figure covers the whole product; I don’t attribute it to any single design change.",
+          ],
+          image: {
+            src: "/work/reepl-platform/mcp.png",
+            alt: "Claude creating a Reepl draft next to Reepl's connector settings page",
+            caption: "Reepl inside Claude: drafts made in a chat land in Reepl.",
+            width: 1024,
+            height: 768,
+          },
+          metrics: [
+            { value: "₹1L+", label: "Monthly recurring revenue, from zero" },
+            { value: "3", label: "Platforms: LinkedIn, X and Reddit" },
+            { value: "2", label: "People on the product team" },
+          ],
+        },
+        {
+          id: "platform-didnt-work",
+          title: "What didn’t work",
+          paragraphs: [
+            "The referral programme, which offered a lifetime plan for invites, never took off. We asked too early, before people had their own first win. I would trigger it after a user’s first post performs well, when they have a real reason to tell someone.",
           ],
         },
       ],
