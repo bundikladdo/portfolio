@@ -112,7 +112,7 @@ export const selectedWork: WorkCard[] = [
     about: "Product redesign · 0 → ₹1 lakh+ MRR",
     year: "2025–26",
     visual: "dotted-grid",
-    artwork: { src: "/work/reepl-platform/composer-app.webp", width: 2000, height: 1133 },
+    artwork: { src: "/work/reepl-platform/composer-card.png", width: 1062, height: 671 },
     case: true,
   },
   {
@@ -232,9 +232,9 @@ export const jobs: Job[] = [
       {
         slug: "reepl-mobile",
         title: "Reepl Mobile",
-        status: "wip",
+        status: "live",
         description:
-          "A native iOS and Android app built around reviewing and publishing Andy’s daily draft. Not yet in production.",
+          "A native iOS and Android app built around reviewing and publishing Andy’s daily draft. Live on Google Play.",
       },
     ],
   },
@@ -315,17 +315,17 @@ export const caseStudies: Record<string, CaseStudy> = {
     problem:
       "Reviewing Andy’s daily LinkedIn drafts depended on the web app. The mobile app brings review, feedback, and publishing into a focused flow on a phone.",
     shipped:
-      "Built a native iOS and Android app around this flow: push notification → read Andy’s draft → approve or edit → publish → see the streak. The app is not yet in production.",
+      "Built a native iOS and Android app around this flow: push notification → read Andy’s draft → approve or edit → publish → see the streak. The Android app is live on Google Play.",
     outcome:
-      "Built, not yet in production. Adoption, publishing frequency, and retention have not been measured.",
+      "Live on Android through Google Play. Adoption, publishing frequency, and retention have not been measured yet.",
     url: "https://reepl.io",
     story: {
       title: "Reepl Mobile: the daily publishing loop",
       subtitle: {
         design:
-          "I designed Reepl’s native iOS and Android app around one daily job: review Andy’s draft, give feedback, and publish. The app is built but not yet in production, so this case study covers the design decisions; impact is still to be measured.",
+          "I designed Reepl’s native iOS and Android app around one daily job: review Andy’s draft, give feedback, and publish. The Android app is live on Google Play; this case study covers the design decisions, and impact is still to be measured.",
         code:
-          "I designed Reepl’s native iOS and Android app and implemented it with AI assistance in 17 days. The app is built but not yet in production; this case study covers the design and implementation, with impact still to be measured.",
+          "I designed Reepl’s native iOS and Android app and implemented it with AI assistance in 17 days. The Android app is live on Google Play; this case study covers the design and implementation, with impact still to be measured.",
       },
       metadata: [
         { label: "Role", value: "Product designer", view: "design" },
@@ -333,7 +333,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         { label: "Timeline", value: "14 Sep – 1 Oct 2026" },
         { label: "Platforms", value: "iOS and Android", view: "design" },
         { label: "Stack", value: "Expo, React Native, TypeScript, Claude Code", view: "code" },
-        { label: "Status", value: "Built · Not yet in production" },
+        { label: "Status", value: "Live on Android · Google Play" },
       ],
       artwork: {
         src: "/work/reepl-mobile/home.png",
@@ -373,7 +373,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-insight",
           title: "The design hypothesis",
           paragraphs: [
-            "I treated mobile as a review surface first, keeping the draft, feedback, and publishing actions together instead of recreating every web feature. The hypothesis is that a focused review flow will make the daily task easier to complete; it has not yet been validated in production.",
+            "I treated mobile as a review surface first, keeping the draft, feedback, and publishing actions together instead of recreating every web feature. The hypothesis is that a focused review flow will make the daily task easier to complete; the app is now live on Android, so this can be measured with real usage.",
           ],
         },
         {
@@ -442,7 +442,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-outcome",
           title: "Current state",
           paragraphs: [
-            "The app is built but has not gone into production. The screens show the built app with sample streak data, so there are no user results to report yet.",
+            "The Android app is live on Google Play. The screens below use sample streak data, and I haven’t measured user results yet, so I make no impact claims here.",
           ],
           image: {
             src: "/work/reepl-mobile/streak.png",
@@ -457,7 +457,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "mobile-next",
           title: "What I’d do next",
           paragraphs: [
-            "Before production, test the approve flow with users and check where they pause, when they need to edit, and whether the publishing actions are clear. After launch, measure review completion time, approval rate, publishing frequency, and return usage before making impact claims.",
+            "Now that it is live, measure review completion time, approval rate, publishing frequency, and return usage, and watch where people pause or edit in the approve flow before making impact claims.",
           ],
         },
       ],
@@ -680,7 +680,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         { label: "Timeline", value: "2025 – present" },
         { label: "Status", value: "Live" },
       ],
-      artwork: { src: "/work/reepl-platform/composer-app.webp", width: 2000, height: 1133 },
+      artwork: { src: "/work/reepl-platform/composer-card.png", width: 1062, height: 671 },
       sections: [
         {
           id: "platform-start",
@@ -708,7 +708,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "“I don’t know if it’s working.” Insights shows reach, engagement and what formats work, and users can simply ask Andy what is working for them.",
           ],
           image: {
-            src: "/work/reepl-platform/signals.png",
+            src: "/work/reepl-platform/signals-card.png",
             alt: "Reepl Signals feed showing trending topics from Reddit, Google Trends and RSS, with the new navigation on the left",
             caption: "Signals: post ideas from Reddit, Google Trends and RSS, inside the new navigation.",
             width: 1024,
@@ -738,11 +738,11 @@ export const caseStudies: Record<string, CaseStudy> = {
             "We disagreed genuinely, and the final layout is a middle ground that is better than either starting position. The same thing happened with Stories, a feature that turns real experiences into posts. The founder wanted a pop-up; I prototyped both versions, and the sidebar version shipped.",
           ],
           image: {
-            src: "/work/reepl-platform/composer-thumbnail.png",
-            alt: "Reepl composer: posts list on the left, editor with a LinkedIn-style preview in the centre, AI sidebar on the right",
-            caption: "The composer: posts, editor with preview, and the AI sidebar, each with one job.",
-            width: 1110,
-            height: 780,
+            src: "/work/reepl-platform/composer-panel.png",
+            alt: "Reepl composer: the editor with a LinkedIn-style preview, and Andy's sidebar on the right",
+            caption: "The composer: editor with preview in the centre, Andy in the sidebar, each with one job.",
+            width: 1024,
+            height: 768,
           },
         },
         {
@@ -757,7 +757,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "A mode switch sits at the top, the connected sources and account are always visible, and permissions are opt-in and explained.",
           ],
           image: {
-            src: "/work/reepl-platform/writing-styles.png",
+            src: "/work/reepl-platform/writing-styles-card.png",
             alt: "Andy's draft in the sidebar with the writing style menu open, listing voice profiles",
             caption: "Choosing a writing style: each voice profile is one click away while drafting.",
             width: 1024,
@@ -802,7 +802,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             "The revenue figure covers the whole product; I don’t attribute it to any single design change.",
           ],
           image: {
-            src: "/work/reepl-platform/mcp.png",
+            src: "/work/reepl-platform/mcp-card.png",
             alt: "Claude creating a Reepl draft next to Reepl's connector settings page",
             caption: "Reepl inside Claude: drafts made in a chat land in Reepl.",
             width: 1024,
