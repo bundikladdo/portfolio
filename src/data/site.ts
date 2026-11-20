@@ -765,6 +765,15 @@ export const caseStudies: Record<string, CaseStudy> = {
           },
         },
         {
+          id: "platform-context",
+          title: "Andy knows where you are",
+          paragraphs: [
+            "Most AI assistants start every chat from zero, so people waste the first message explaining what they are looking at. I designed Andy to pick up that context on its own.",
+            "A small chip above the input shows what Andy can see: “Viewing: Dashboard”, “Viewing: Calendar”, or “From Composer” with the post being edited. Asking “make this shorter” just works, because Andy already knows what “this” is.",
+            "The chip can be removed with one click, so people stay in control of what the AI reads. The same conversation follows the user from page to page instead of resetting.",
+          ],
+        },
+        {
           id: "platform-extension",
           title: "Redesigning the extension",
           paragraphs: [
