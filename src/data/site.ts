@@ -2,6 +2,9 @@ export const site = {
   name: "Kartik Jangid",
   role: "Product designer who ships",
   location: "Jaipur, Rajasthan",
+  url: "https://kartikjangid.vercel.app",
+  description:
+    "Product designer at Autodeus Technologies. Redesigned Reepl from a LinkedIn extension into a multi-platform social media product, now past ₹1 lakh MRR. Based in Jaipur, open to remote work and relocation.",
   email: "jangidkartik002@gmail.com",
   headline: [
     "Product Designer working with",
@@ -73,12 +76,12 @@ export type View = "design" | "code";
 /** Copy that reads differently in the Design and Code views. */
 export type ViewText = string | Record<View, string>;
 
-export const autodeusProducts = [
-  { name: "Smartify", href: "https://smartify.in", image: "/products/smartify.png" },
+// Products without an image file show their first letter instead.
+export const autodeusProducts: { name: string; href: string; image?: string }[] = [
   { name: "Reepl", href: "https://reepl.io", image: "/reepl.png" },
-  { name: "Inferenc", href: "https://infernec.com", image: "/products/inferenc.png" },
-  { name: "Verk", href: "https://verkapp.com", image: "/products/verk.png" },
-] as const;
+  { name: "Smartify", href: "https://smartify.in" },
+  { name: "Verk", href: "https://verkapp.com" },
+];
 
 export type Project = {
   slug: string;
@@ -126,7 +129,7 @@ export const selectedWork: WorkCard[] = [
   },
   {
     slug: "reepl-onboarding",
-    line: "Reepl Onboarding: Show the Product Before Asking for the Commitment",
+    line: "Reepl Onboarding: Goal-based setup before the paywall",
     about: "SaaS onboarding · Product design",
     year: "2026",
     visual: "dotted-grid",
@@ -147,7 +150,7 @@ export const selectedWork: WorkCard[] = [
   },
   {
     slug: "garga",
-    line: "An astrology app that gives the same answer twice",
+    line: "Garga: an AI astrology app that gives the same answer twice",
     about: {
       design: "Side project · Product design",
       code: "Side project · Product design & AI-assisted building",
@@ -155,13 +158,6 @@ export const selectedWork: WorkCard[] = [
     year: "2025",
     image: "/backgrounds/pixel-blast.png",
     case: true,
-  },
-  {
-    slug: "ui-blocks",
-    line: "Production screens for React teams",
-    about: "Product design research",
-    year: "2026",
-    image: "/backgrounds/pixel-blast.png",
   },
 ];
 
@@ -457,7 +453,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     outcome: "Live. The flow now shows relevant product value before users choose an activation path.",
     url: "https://reepl.io",
     story: {
-      title: "Reepl Onboarding: Show the Product Before Asking for the Commitment",
+      title: "Reepl Onboarding: Goal-based setup before the paywall",
       subtitle: "Reepl asked users to start a paid trial before they had seen the product work. I redesigned onboarding around each user’s stated goal and added a personalized Andy demo before plan selection.",
       metadata: [
         { label: "Duration", value: "2 weeks" },
@@ -581,7 +577,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     story: {
       title: "Turning LinkedIn connections into actionable relationships",
       subtitle:
-        "We designed a lightweight CRM for LinkedIn relationship management, connecting content, engagement, conversations, and follow-up.",
+        "I designed a lightweight CRM for LinkedIn relationship management, connecting content, engagement, conversations, and follow-up.",
       metadata: [
         { label: "Role", value: "Product designer (0→1 product design)" },
         { label: "Users", value: "People building and managing lead lists" },
@@ -627,7 +623,7 @@ export const caseStudies: Record<string, CaseStudy> = {
           id: "relationship-solution",
           title: "Solution",
           paragraphs: [
-            "We designed a centralized people view that made the next useful action visible instead of treating contacts as a static address book. The relationship could be organized in Reepl, then prepared for the team’s existing CRM.",
+            "I designed a centralized people view that made the next useful action visible instead of treating contacts as a static address book. The relationship could be organized in Reepl, then prepared for the team’s existing CRM.",
           ],
           list: [
             "Centralized people and contact view",

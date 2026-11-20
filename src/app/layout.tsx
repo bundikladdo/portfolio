@@ -8,13 +8,25 @@ import "react-h5-audio-player/lib/styles.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.name}, ${site.role}`,
     template: `%s — ${site.name}`,
   },
-  description:
-    "Product designer in Jaipur, working on Reepl at Autodeus Technologies. I take fuzzy things, like AI output, and design them into flows people can understand and check.",
+  description: site.description,
   authors: [{ name: site.name }],
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: `${site.name}, ${site.role}`,
+    description: site.description,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name}, ${site.role}`,
+    description: site.description,
+  },
 };
 
 export default function RootLayout({

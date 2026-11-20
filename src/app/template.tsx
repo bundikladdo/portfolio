@@ -3,7 +3,9 @@
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 
-const revealInterval = 60;
+const revealInterval = 40;
+// Longest stagger delay, so long pages don't stay blank while items queue up.
+const maxRevealDelay = 320;
 const textSelector = "h1, h2, h3, h4, p, li, figcaption";
 const itemSelector = [
   ".hero-links",
@@ -56,7 +58,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           )
           .forEach((entry) => {
             const target = entry.target as HTMLElement;
-            const start = Math.max(now, nextRevealAt);
+            const start = Math.min(Math.max(now, nextRevealAt), now + maxRevealDelay);
             target.style.willChange = "opacity, filter, transform";
             target.style.setProperty("--reveal-delay", `${start - now}ms`);
             target.classList.add("is-visible");

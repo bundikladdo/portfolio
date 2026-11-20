@@ -63,9 +63,11 @@ export default function AboutPage() {
         <div className="about-copy">
           <p data-view-only="design">
             I’m a product designer at Autodeus Technologies, working remotely on
-            Reepl, an AI tool for writing LinkedIn posts. I’ve designed its
-            onboarding, contact management, and iOS and Android app, and built
-            the team’s Figma design system.
+            Reepl. I redesigned it from a LinkedIn commenting extension into a
+            multi-platform social media product, now past ₹1 lakh in monthly
+            recurring revenue, and I run its product and marketing alongside
+            design. I’ve designed its onboarding, contact management, and iOS and
+            Android app.
           </p>
           <p data-view-only="design">
             I like taking fuzzy things, like AI output, and designing them into
@@ -75,16 +77,15 @@ export default function AboutPage() {
             I’m a product designer at Autodeus Technologies, working remotely on
             Reepl. I design in Figma and take my work into code: I implemented
             Reepl’s iOS and Android app with Claude Code, Expo, React Native, and
-            TypeScript, and I code reusable UI components with the team’s
-            engineers.
+            TypeScript, and I review shipped UI with the team’s engineers.
           </p>
           <p data-view-only="code">
             AI writes much of the implementation. The product and interaction
             decisions, and the review of what gets built, stay with me.
           </p>
           <p>
-            I’ve also worked with teams at Tutedude, RoomsVital, and Iceberg Ice
-            Creams.
+            Before Reepl, I designed at Tutedude and RoomsVital, and I build Garga,
+            an AI astrology app, as a side project.
           </p>
           <p>Based in {site.location}.</p>
         </div>

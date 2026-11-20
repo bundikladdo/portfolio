@@ -29,30 +29,27 @@ export default function Home() {
           <h1 className="hero-name">{site.name}</h1>
           <p className="t-lede">
             Product designer at <AutodeusChip />, working on{" "}
-            <BrandChip brand={brands.reepl} />, an AI tool for writing LinkedIn posts.
+            <BrandChip brand={brands.reepl} />, an AI social media product.
           </p>
         </div>
         <div className="hero-copy">
-          <p className="t-lede" data-view-only="design">
-            I redesigned Reepl’s onboarding so new users see the product working
-            before they choose a plan, and designed its iOS and Android app around
-            a daily review habit.
+          <p className="t-lede">
+            I redesigned Reepl from a LinkedIn commenting extension into a
+            multi-platform social media product, now past ₹1 lakh in monthly
+            recurring revenue. I run its product and marketing alongside design.
           </p>
           <p className="t-lede" data-view-only="design">
-            I also built the team’s Figma design system, and use usability tests
-            and interviews to find where workflows break.
+            I also redesigned its onboarding so new users see the product working
+            before they choose a plan, and designed its iOS and Android app around
+            a daily review habit.
           </p>
           <p className="t-lede" data-view-only="code">
             I designed Reepl’s iOS and Android app and implemented it with AI
             assistance in 17 days, using Claude Code, Expo, React Native, and
             TypeScript.
           </p>
-          <p className="t-lede" data-view-only="code">
-            I also code reusable UI components and coordinate handoffs with the
-            team’s engineers.
-          </p>
           <p className="t-lede">
-            I’ve worked with teams at Tutedude, RoomsVital, and Iceberg Ice Creams.
+            Before Reepl, I designed at Tutedude and RoomsVital.
           </p>
           <p className="t-lede">Based in Jaipur, Rajasthan, working remotely.</p>
         </div>
@@ -82,7 +79,7 @@ export default function Home() {
 
       <footer id="contact" className="pane text-sm text-[var(--body)]">
         <div className="footer-row">
-          <p>Last updated <time dateTime="2026-10-19">October 19, 2026</time></p>
+          <p>Last updated <time dateTime="2026-11-20">November 20, 2026</time></p>
           <ThemeToggle />
         </div>
       </footer>

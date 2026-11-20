@@ -28,7 +28,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = allProjects.find((p) => p.slug === slug);
   const study = caseStudies[slug];
-  return { title: study?.story?.title ?? project?.title ?? "Work" };
+  const title = study?.story?.title ?? project?.title ?? "Work";
+  const subtitle = study?.story?.subtitle;
+  const description =
+    (typeof subtitle === "string" ? subtitle : subtitle?.design) ??
+    project?.description;
+  return {
+    title,
+    description,
+    openGraph: { title, description, url: `/work/${slug}` },
+    twitter: { title, description },
+  };
 }
 
 export default async function WorkPage({ params }: Props) {
@@ -130,7 +140,7 @@ export default async function WorkPage({ params }: Props) {
                     {section.paragraphs.length > 0 && (
                       <div className="mt-4 space-y-4">
                         {section.paragraphs.map((paragraph) => (
-                          <p className="t-lede text-justify" key={paragraph}>
+                          <p className="t-lede" key={paragraph}>
                             {paragraph}
                           </p>
                         ))}
@@ -227,7 +237,7 @@ export default async function WorkPage({ params }: Props) {
           <div className="relative mt-10 overflow-hidden rounded-[10px] border border-hairline bg-[var(--surface)]">
             <Image
               src={study.image}
-              alt=""
+              alt={`${project.title} product screenshot`}
               width={1600}
               height={1000}
               className="h-auto w-full object-cover object-top"

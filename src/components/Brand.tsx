@@ -37,8 +37,11 @@ export function AutodeusChip() {
           <a key={p.name} href={p.href} target="_blank" rel="noreferrer">
             <span
               className="brand-tip-thumb"
-              style={{ backgroundImage: `url(${p.image})` }}
-            />
+              style={p.image ? { backgroundImage: `url(${p.image})` } : undefined}
+              aria-hidden
+            >
+              {p.image ? null : p.name.charAt(0)}
+            </span>
             {p.name}
           </a>
         ))}

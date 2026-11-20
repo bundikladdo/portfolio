@@ -630,6 +630,14 @@ p {
 
 .page-content-enter:not(.reveal-ready) main {
   visibility: hidden;
+  /* Failsafe: show content after 1s even if scripts are slow to load. */
+  animation: reveal-failsafe 0s linear 1s forwards;
+}
+
+@keyframes reveal-failsafe {
+  to {
+    visibility: visible;
+  }
 }
 
 .page-content-enter:not(.reveal-ready) .reveal-item {
@@ -1745,6 +1753,12 @@ p {
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0.45;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .btn {
