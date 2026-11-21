@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { ViewSwitch } from "@/components/ViewSwitch";
 import { site } from "@/data/site";
 import "lenis/dist/lenis.css";
 import "react-h5-audio-player/lib/styles.css";
@@ -66,7 +65,6 @@ export default function RootLayout({
           <div className="frame">
             {children}
           </div>
-          <ViewSwitch />
         </SmoothScroll>
       </body>
     </html>
